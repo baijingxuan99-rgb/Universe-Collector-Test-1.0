@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>探索与经营对照试玩 · 宇宙收藏家</title>
+<style>
+:root{color-scheme:dark;--bg:#14141d;--card:#20202c;--line:#404052;--text:#f4eee7;--muted:#c2bbc9;--accent:#ffcf86}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#333047,var(--bg) 65%);color:var(--text);font:16px/1.65 system-ui,sans-serif}
+main{max-width:980px;margin:auto;padding:42px 22px 64px}h1,h2,p{margin:0 0 14px}h1{font-size:clamp(30px,5vw,54px);letter-spacing:-.04em;line-height:1.12}h2{font-size:22px}.sub{color:var(--muted)}.brand{color:var(--accent);font-size:14px}.toolbar,.actions,.stats{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}.stats{gap:22px;color:var(--accent)}.panel{padding:24px;margin-top:18px;border:1px solid var(--line);background:var(--card);border-radius:16px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid>.panel{margin-top:0}.panel h3{margin:0 0 7px}
+button{font:inherit;border-radius:9px;border:1px solid #66637e;padding:9px 13px;background:#333249;color:var(--text);cursor:pointer;text-align:left}button.primary{background:var(--accent);color:#251c12;font-weight:700;border-color:var(--accent)}button[aria-pressed=true]{border-color:var(--accent);background:#453951}button:disabled{opacity:.45;cursor:default}button:focus-visible,summary:focus-visible{outline:2px solid #fff;outline-offset:4px}summary{cursor:pointer}ul{padding-left:22px}.note{color:#c6dcba}.warn{color:#ffd2aa}.compact{font-size:14px}#notice:empty{display:none}#notice{margin:15px 0;color:#f4db9e}a{color:var(--accent)}@media(max-width:640px){.grid{grid-template-columns:1fr}.panel{padding:16px}}
+</style>
+<main>
+<header><div class="brand">宇宙收藏家 · 玩法大迭代 V1</div><h1>今晚来过的人</h1><p class="sub">从一封打烊来信开始，过两个营业日。决定要不要出门查配方，以及给谁留货位。</p></header>
+<div class="toolbar" aria-label="试玩版本">
+<button type="button" data-mode="A" aria-pressed="true">A · 普通来信</button><button type="button" data-mode="B" aria-pressed="false">B · 街坊预约</button>
+<button type="button" id="restart">重开本组</button><button type="button" id="export" disabled>导出试玩记录</button>
+</div>
+<div id="notice" role="status"></div><section id="game" aria-label="试玩"></section>
+<details class="panel compact"><summary>测试规则</summary><p>每组从 12 币、6 格货架、空库存开始。星星糖进价 2、售价 3，月亮糖进价 3、售价 5。常客每晚买最多 4 件星星糖。月亮糖订单需凑足 2 件才成交。每天可以选择出门一次或直接备货。未售库存跨夜保留。</p><p>A 组有两笔主题需求，固定第一晚到店、第二晚缺席。B 组在前一晚给出同规格的实名预约，两晚按约到店。测试同时改变需求可见性和履约确定性。每组共两晚，使用本页按钮导出本次浏览器会话的记录。</p></details>
+</main>
+<script>
+'use strict';
+const goods={star:{name:'星星糖',cost:2,price:3},moon:{name:'月亮糖',cost:3,price:5}};
+const quests=[
+ {person:'埃米尔',object:'月牙糖',goal:'找出既是月牙形、又用糖浆做的试样。',evidence:['弯月：白蜡、红蜡','糖浆：蓝蜡、红蜡'],choices:['白蜡','红蜡','蓝蜡'],answer:1},
+ {person:'玛德琳',object:'带柠檬香的月牙糖',goal:'找出带柠檬香、糖衣耐放的配方。',evidence:['柠檬香：叶纹、花纹','耐放糖衣：叶纹、羽纹'],choices:['叶纹','花纹','羽纹'],answer:0}
+];
+const sessions=[];
+let mode='A',state;
+const game=document.querySelector('#game');
+const notice=document.querySelector('#notice');
+function event(action,data={}){
+ const time=Math.round(performance.now()-state.started);
+ state.record.events.push({day:state.day,timeMs:time,action,...data});
+ document.querySelector('#export').disabled=false;
+}
+function start(next){
+ mode=next;
+ const record={mode,startedAt:new Date().toISOString(),events:[]};
+ sessions.push(record);
+ state={record,started:performance.now(),day:1,phase:'letter',cash:12,stock:{star:0,moon:0},seen:[],solved:[false,false],picked:null,result:null};
+ document.querySelectorAll('[data-mode]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.mode===mode)));
+ say('');render();
+}
+const q=()=>quests[state.day-1];
+const total=()=>state.stock.star+state.stock.moon;
+const button=(label,action,key='',opts={})=>'<button type="button" data-action="'+action+'" data-key="'+key+'"'+(opts.primary?' class="primary"':'')+(opts.disabled?' disabled':'')+(opts.pressed===undefined?'':' aria-pressed="'+opts.pressed+'"')+'>'+label+'</button>';
+function say(line){notice.textContent=line;}
+function render(){
+ const quest=q(), letter=mode==='B'
+  ? quest.person+'留下预约：「今晚回来买两份'+quest.object+'。若准备不过来，下次见也好。」'
+  : '收到来信：'+quest.person+'想知道'+quest.object+'怎么做。今晚也许有人想买。';
+ let body='';
+ if(state.phase==='letter')body='<h2>打烊后留下的来信</h2><p>'+letter+'</p><div class="actions">'+button('出门查配方','explore','',{primary:true})+button('直接备货','prepare')+'</div>';
+ if(state.phase==='puzzle')body='<h2>核对两条线索</h2><p>'+quest.goal+'</p><div class="actions">'+quest.evidence.map((line,i)=>button('查看线索 '+(i+1),'evidence',i,{pressed:state.seen.includes(i)})).join('')+'</div><ul>'+state.seen.map(i=>'<li>'+quest.evidence[i]+'</li>').join('')+'</ul><div class="actions">'+quest.choices.map((label,i)=>button(label,'pick',i,{pressed:state.picked===i,disabled:state.seen.length<2})).join('')+button('提交配方','solve','',{primary:true,disabled:state.picked===null})+button('先回店备货','prepare')+'</div>';
+ if(state.phase==='shop'){
+  body='<h2>给今晚留货位</h2><p>常客要 4 件星星糖。'+(mode==='B'?quest.person+'预约了 2 件月亮糖。':'今晚可能有一笔 2 件月亮糖的订单。')+'</p><div class="grid">'+Object.entries(goods).map(([key,item])=>'<section class="panel"><h3>'+item.name+' · '+state.stock[key]+' 件</h3><p>进价 '+item.cost+' 币 · 售价 '+item.price+' 币</p>'+(key==='moon'&&!state.solved[state.day-1]?'<p class="sub">完成今天的调查后可新进货。已有库存可正常售卖。</p>':'')+button('采购 1 件','buy',key,{disabled:state.cash<item.cost||total()===6||(key==='moon'&&!state.solved[state.day-1])})+'</section>').join('')+'</div><div class="actions">'+button('开门结算','open','',{primary:true,disabled:!total()})+button('今晚休息','rest')+'</div>';
+ }
+ if(state.phase==='receipt'||state.phase==='done'){
+  const r=state.result;
+  body='<h2>'+ (state.phase==='done'?'两晚试玩结束':'打烊小票')+'</h2><p>'+r.summary+'</p><p class="note">本晚收入 '+r.revenue+' 币。库存剩星星糖 '+state.stock.star+' 件、月亮糖 '+state.stock.moon+' 件。</p>';
+  if(state.phase==='receipt')body+='<div class="actions">'+button('看下一封来信','next','',{primary:true})+button('在这里结束','end')+'</div>';
+  else body+='<div class="actions">'+button('重开本组','restart')+button('换另一组','switch')+button('导出试玩记录','export','',{primary:true})+'</div>';
+ }
+ game.innerHTML='<div class="panel"><div class="stats" aria-label="当前状态"><span>第 '+state.day+' 晚</span><span>现金 '+state.cash+' 币</span><span>货架 '+total()+' / 6</span></div>'+body+'</div>';
+}
+function finish(rest){
+ const arrived=mode==='B'||state.day===1;
+ const star=rest?0:Math.min(state.stock.star,4);
+ const moon=!rest&&arrived&&state.stock.moon>=2?2:0;
+ const revenue=star*goods.star.price+moon*goods.moon.price;
+ state.stock.star-=star;state.stock.moon-=moon;state.cash+=revenue;
+ const summary=rest?'今晚休息，货物留到明天。':'售出星星糖 '+star+' 件。'+(arrived?(mode==='B'?q().person+'按约到店':'主题客到店')+'，售出月亮糖 '+moon+' 件。':'主题客今晚没来。');
+ state.result={summary,revenue};
+ event('settle',{rest,arrived:!rest&&arrived,starSold:star,moonSold:moon,revenue,stock:{...state.stock},cash:state.cash});
+ state.phase=state.day===1?'receipt':'done';
+ if(state.phase==='done')event('finish');
+}
+function exportLog(){
+ const blob=new Blob([JSON.stringify({version:'1.0',sessions:sessions.filter(x=>x.events.length)},null,2)],{type:'application/json'});
+ const href=URL.createObjectURL(blob);
+ const link=document.createElement('a');link.href=href;link.download='cosmic-collector-loop-v1.json';link.click();
+ setTimeout(()=>URL.revokeObjectURL(href),1000);
+}
+game.addEventListener('click',e=>{
+ const control=e.target.closest('[data-action]');
+ if(!control||control.disabled)return;
+ const {action,key}=control.dataset;
+ say('');
+ switch(action){
+ case 'explore':event('explore');state.phase='puzzle';break;
+ case 'prepare':event('prepare',{solved:state.solved[state.day-1]});state.phase='shop';break;
+ case 'evidence':if(!state.seen.includes(+key)){state.seen.push(+key);event('evidence',{index:+key});}break;
+ case 'pick':state.picked=+key;break;
+ case 'solve':{
+  const correct=state.picked===q().answer;
+  event('solve',{choice:state.picked,correct});
+  if(correct){state.solved[state.day-1]=true;state.phase='shop';say('配方已确认。月亮糖可以进货了。');}
+  else say('这份试样只符合一条线索。看看两个名单中哪个名字重复出现。');
+  break;
+ }
+ case 'buy':state.cash-=goods[key].cost;state.stock[key]++;event('buy',{item:key,cash:state.cash});break;
+ case 'open':finish(false);break;
+ case 'rest':finish(true);break;
+ case 'next':event('continue');state.day++;state.seen=[];state.picked=null;state.phase='letter';break;
+ case 'end':event('stop');state.phase='done';break;
+ case 'switch':start(mode==='A'?'B':'A');return;
+ case 'restart':start(mode);return;
+ case 'export':exportLog();return;
+ }
+ render();
+});
+document.querySelectorAll('[data-mode]').forEach(button=>button.addEventListener('click',()=>{if(button.dataset.mode!==mode)start(button.dataset.mode);}));
+document.querySelector('#restart').addEventListener('click',()=>start(mode));
+document.querySelector('#export').addEventListener('click',exportLog);
+start(mode);
+</script>
+</html>
