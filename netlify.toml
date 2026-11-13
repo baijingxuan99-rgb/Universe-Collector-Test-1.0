@@ -1,2 +1,8 @@
 [build]
   publish = "public"
+
+[[redirects]]
+  from = "/"
+  to = "/workbench.html"
+  status = 200
+  force = true
