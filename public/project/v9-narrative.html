@@ -1,0 +1,98 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V9 叙事与规则修订 · 宇宙收藏家</title><style>body{margin:0;background:#241a1b;color:#fbecd8;font:16px/1.7 system-ui,sans-serif}main{max-width:980px;margin:auto;padding:24px 18px 60px}nav{display:flex;gap:16px;flex-wrap:wrap}a{color:#ffda97}h1,h2,h3{color:#fff1db;line-height:1.3}h2{margin-top:1.8em;border-top:1px solid #7c675e;padding-top:.6em}blockquote{margin-left:0;border-left:3px solid #be9a64;padding:.2em 1em;background:#382728}.table-scroll{overflow:auto}table{border-collapse:collapse;width:100%;min-width:490px}th,td{border:1px solid #7c675e;padding:8px 11px;text-align:left;vertical-align:top}th{background:#553a2c}pre{overflow:auto;background:#151117;padding:10px}img{max-width:100%}</style></head><body><main><nav><a href="/#archive">返回项目档案</a><a href="/#play">工作台试玩</a><a href="/project/v9-narrative.md">下载 Markdown</a></nav><h1>《宇宙收藏家》V9 叙事修订与待选事项</h1>
+<h2>已接入试玩</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>位置</th>
+<th>原问题</th>
+<th>V9 的动作与证据</th>
+<th>文案或结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第二封回访 · 月牙甜点</td>
+<td>投影能判断形状，无法验证纸里是不是食物</td>
+<td>依封蜡打开同批试样，直接认外形；独立查摊主配料册或门边副签。花纹是唯一兼有弯月外形和糖、柠檬汁配料的包裹。</td>
+<td>埃米尔要把能吃的月亮带给怕黑的孩子。路灯只负责照明。</td>
+</tr>
+<tr>
+<td>月牙甜点结算</td>
+<td>找到甜点、得到经营账簿和扩仓的关系缺一环</td>
+<td>委托人确认封蜡，介绍供货，交出记着供应与到货量的账簿，分出四格仓位。</td>
+<td>玩家交付的是与试样同批的货，账簿能在之后的备货中使用。</td>
+</tr>
+<tr>
+<td>雇佣店员</td>
+<td>人手到岗直接增加固定来客，缺少动作因果</td>
+<td>店员在柜台按现有预约补货并收银找零。开门就可委托整班。</td>
+<td>玩家仍可手动接待，缺货仍按原规则结算。65 币仍为测试价。</td>
+</tr>
+<tr>
+<td>琴房第一日</td>
+<td>台词说调号缺失，线索却说原页看见两枚升号</td>
+<td>原页缺角，压在下方的旧拓印仍有两枚升号，键盘终止音用于交叉核对。</td>
+<td>「我留了一张旧拓印。要抄给南内尔，先跟键盘对一遍。」</td>
+</tr>
+<tr>
+<td>琴房第二、三日</td>
+<td>提示解释任务但缺少人物正在处理的事情</td>
+<td>两把椅子等待分谱；脚印与键盘拍点对照排练。</td>
+<td>从「该把谱递给谁」过渡到「把深脚印对准亮起的第一拍」。</td>
+</tr>
+<tr>
+<td>琴房终场</td>
+<td>完成后留在已归档画面，缺少下一步</td>
+<td>第三日交付出现结算窗口，主按钮直接回到小店；留下查看后仍有常驻回店按钮。</td>
+<td>回店仍是同一天，继续预约备货。</td>
+</tr>
+</tbody></table></div>
+<h2>仍值得用试玩定的两项</h2>
+<p><strong>店员定价与职责。</strong> 当前一键委托的主要价值是省去首笔手动收银，并从开门起代办补货。这是便利性购买，能节省操作，收益由现有订单决定。可选择维持一次性雇佣 65 币，降低试验价到 25–35 币，或用按晚帮工小额付费来测玩家是否愿意付钱节省时间。当前试玩采用第一种。</p>
+<p><strong>月牙任务的推理方式。</strong> 当前是形状与配料两份证据，支持先查任意一份。若首次玩家仍把封蜡误认为答案，可改成把同封蜡试样拖到实物旁逐一比对。若更重视剧情，可让摊主亲手打开一份样品示范，其余由玩家检查。试玩时先看玩家能否说出「形状与能不能吃分别从哪里确认」，再决定是否增加演出。</p>
+<p>历史作品编号、人物生平与戏剧化台词继续分开标注。巴黎琴房的日程和来信为游戏演绎。第三章尚为草案。</p>
+<h2>可直接用于制作的触发脚本</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>触发</th>
+<th>玩家看到或听到</th>
+<th>系统写入</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>打开埃米尔的信</td>
+<td>「孩子怕黑，我答应带她一弯能吃的月亮。摊上还卖纸月亮，别拿混了。」</td>
+<td>显示形状与配料两个检查目标</td>
+</tr>
+<tr>
+<td>观察开封样盘</td>
+<td>「每个包裹都有一份同封蜡的开封试样。路灯把桌面照亮了，可以直接比外形。」</td>
+<td>羽纹、花纹符合弯月形</td>
+</tr>
+<tr>
+<td>查配料册或门边副签</td>
+<td>「摊主按封蜡记配料。两件用糖和柠檬汁，另一件登记为纸与浆糊。」</td>
+<td>叶纹、花纹符合糖果配料，两个配料入口共用同一证据</td>
+</tr>
+<tr>
+<td>交付花纹封蜡包裹</td>
+<td>埃米尔核对封蜡，把糖果装进给孩子的小袋，再交出记着供应和到货量的黄铜扣账簿。</td>
+<td>初次交付解锁月亮糖采购、经营账簿、额外 4 格仓位</td>
+</tr>
+<tr>
+<td>小店雇佣成功</td>
+<td>「店员到岗。开门后，可把柜台交给他；现有预约单会按顺序处理。」</td>
+<td>第三天起可买一次，支出 65 币；既有队列照原样生成</td>
+</tr>
+<tr>
+<td>巴黎第一日查旧拓印</td>
+<td>「夹在谱页下的拓印留着两个升号，原页的左上角却缺了一块。」</td>
+<td>与键盘的 D 终止音互相验证</td>
+</tr>
+<tr>
+<td>巴黎第三日交付</td>
+<td>结算窗口内选择「返回小店」或留在琴房。离开窗口后，场景上方仍有「返回小店」。</td>
+<td>保存本章奖励，返回当天小店备货</td>
+</tr>
+</tbody></table></div>
+</main></body></html>

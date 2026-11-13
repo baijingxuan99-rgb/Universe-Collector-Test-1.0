@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10162a">
+<title>宇宙收藏家 · 梦中拾星 | 试玩 V3</title>
+<style>
+:root{color-scheme:dark;--bg:#101526;--panel:#1b2339;--deep:#141b2d;--line:#3a4560;--ink:#fbf1da;--sub:#bac4db;--gold:#f6d897;--teal:#a1e2cc;--rose:#ffb6b1}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 82% 3%,#292742 0,transparent 42%),var(--bg);font:16px/1.6 system-ui,"Microsoft YaHei","Noto Sans SC",sans-serif;color:var(--ink)}
+button,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);color:var(--ink);background:#293550;border-radius:10px;padding:.5rem .8rem;transition:background .16s,transform .16s}button:hover:not(:disabled){background:#3b4b6a}button:active:not(:disabled){transform:translateY(1px)}button:disabled{opacity:.46;cursor:not-allowed}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}button.primary{background:var(--gold);color:#272033;border-color:transparent;font-weight:750}button.primary:hover:not(:disabled){background:#ffebb9}button.quiet{background:transparent;color:var(--sub)}button.chosen{border-color:var(--teal);background:#244745}
+.top{position:sticky;top:0;z-index:5;background:#141a2bf2;border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}.top-inner{max-width:1240px;margin:auto;min-height:70px;padding:10px 24px;display:flex;align-items:center;gap:16px;justify-content:space-between}.brand{display:flex;align-items:center;gap:11px}.brand-icon{border:1px solid #806e54;border-radius:12px;width:40px;height:40px;display:grid;place-items:center;color:var(--gold);font-size:24px}.brand b{font-size:17px;letter-spacing:.08em;white-space:nowrap}.brand small{display:block;color:var(--sub);font-size:11px;letter-spacing:.11em}.top-tools,.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.pill{border:1px solid var(--line);border-radius:999px;padding:.2rem .65rem;font-size:.84rem;white-space:nowrap}.gold{color:var(--gold)}.good{color:var(--teal)}.bad{color:var(--rose)}
+.wrap{max-width:1240px;padding:25px 24px 40px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:20px}.main,.side{min-width:0}.tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}.tabs button{padding:.42rem .8rem}.tabs [aria-current=page]{border-color:#a88b5d;background:#493d47;color:var(--gold)}.panel{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:18px;margin-bottom:14px}.side .panel{padding:15px}.eyebrow{font-size:.75rem;color:var(--gold);letter-spacing:.17em;font-weight:750}h1,h2,h3,p{margin:0 0 .48rem}h1,h2{line-height:1.25}h1{font-size:clamp(27px,4vw,42px);letter-spacing:.035em}h2{font-size:clamp(22px,3vw,28px)}h3{font-size:1rem}p:last-child{margin-bottom:0}.sub,small{color:var(--sub)}.small{font-size:.86rem}.divider{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}.scene{position:relative;overflow:hidden;border-radius:16px;border:1px solid #4c506d;background:#262f50;aspect-ratio:2.15;margin-top:15px}.scene svg{width:100%;height:100%;display:block}.spot{position:absolute;transform:translate(-50%,-50%);background:#161d35ec;border:1px solid #a28e78;white-space:nowrap;font-size:clamp(12px,1.4vw,14px);padding:.34rem .57rem;box-shadow:0 3px 10px #0a0d20a0}.spot:active:not(:disabled){transform:translate(-50%,-49%)}.spot.active{border-color:var(--gold);color:var(--gold)}.spot.solved{border-color:var(--teal);color:var(--teal)}.scene-note{position:absolute;bottom:8px;right:10px;color:#e0dcf0;background:#131827cc;border-radius:5px;padding:0 5px;font-size:11px;pointer-events:none}.water-ripple{transform-box:fill-box;transform-origin:center;animation:ripple 2.8s infinite}.twinkle{animation:twinkle 3s infinite alternate}@keyframes ripple{from{opacity:.9;transform:scale(.85)}to{opacity:.18;transform:scale(1.16)}}@keyframes twinkle{to{opacity:.38}}
+.dialog{margin-top:12px;background:var(--deep);border-left:3px solid #b99464;padding:13px;border-radius:0 12px 12px 0}.dialog p{color:var(--sub)}.dialog .row{margin-top:10px}.pocket{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.token{display:grid;place-items:center;min-height:50px;background:#12192a;border:1px dashed #4d5971;border-radius:9px;text-align:center;color:var(--sub);font-size:.8rem}.token.found{background:#2f3d4c;border:1px solid #948366;color:var(--gold)}.token i{font-style:normal;font-size:1.15rem;line-height:1}.hint{border-left:3px solid #9a8da9;background:#24263e;padding:.65rem .8rem;margin-top:.75rem;color:#e9daef;border-radius:0 10px 10px 0}.slots,.candidates,.cards,.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0}.slots button,.candidates button{text-align:left}.candidates{grid-template-columns:repeat(2,minmax(0,1fr))}.card,.metric{border:1px solid var(--line);background:var(--deep);border-radius:11px;padding:11px}.metric b{display:block;font-size:1.32rem;color:var(--gold)}.shelf{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:5px;margin:10px 0}.cell{border:1px dashed var(--line);border-radius:7px;min-height:36px;display:grid;place-items:center;color:var(--sub);font-size:.9rem}.cell.filled{border-style:solid;background:#42374c;color:var(--gold)}.notice{border:1px solid #5e5368;background:#2c293e;padding:12px;border-radius:11px;margin:10px 0}.product{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}.product:last-child{border-bottom:0}.product .row{justify-content:flex-end}.product button{padding:.3rem .56rem}.queue{display:flex;gap:5px;flex-wrap:wrap;margin:10px 0}.queue span{border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-size:.85rem}.queue .now{border-color:var(--gold);color:var(--gold)}.queue .done{color:var(--sub);opacity:.67}.sale-log{padding-left:1.3rem;color:var(--sub);margin:.55rem 0;max-height:115px;overflow:auto}.live{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--deep);min-height:45px;color:var(--teal);margin-bottom:14px}.side .live{font-size:.9rem}.strike{position:relative;height:72px;background:#121a2a;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:10px 0}.strike::after{content:"";position:absolute;left:78%;width:3px;top:0;bottom:0;background:var(--gold)}.note{position:absolute;top:22px;transform:translateX(-50%);color:var(--teal);font-size:20px}.fine{font-size:.79rem;color:var(--sub)}summary{cursor:pointer;color:var(--gold)}
+@media(max-width:900px){.wrap{grid-template-columns:minmax(0,1fr) 210px;gap:12px;padding:18px 14px}.top-inner{padding:9px 14px}.cards{grid-template-columns:1fr 1fr}.shelf{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:680px){.wrap{display:flex;flex-direction:column}.side{display:grid;grid-template-columns:1fr 1fr;gap:9px}.side .live{grid-column:1/-1;grid-row:1}.top-inner{gap:7px}.top-tools{justify-content:flex-end}.brand{gap:7px}.brand-icon{width:32px;height:32px}.brand b{font-size:15px}.brand small{display:none}.top-tools button{padding:.25rem .5rem;font-size:.78rem}.top-tools .pill{font-size:.77rem}.panel{padding:13px}.scene{aspect-ratio:1.75}.product{grid-template-columns:1fr}.product .row{justify-content:flex-start}.metrics,.slots{gap:5px}.metric,.slots button{padding:7px}.spot{padding:.25rem .35rem}.tabs{gap:5px}.tabs button{font-size:.86rem;padding:.36rem .58rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-inner"><div class="brand"><span class="brand-icon" aria-hidden="true">✧</span><div><b>宇宙收藏家</b><small>音乐宇宙 · 梦中拾星 · V3</small></div></div><div class="top-tools"><span class="pill" id="day"></span><span class="pill gold" id="cash" aria-label="宇宙币"></span><button data-a="mute" id="mute"></button></div></div></header>
+<div class="wrap"><main class="main" id="main"><nav class="tabs" id="tabs" aria-label="玩法导航"></nav><div id="view"></div></main><aside class="side" id="side"></aside></div>
+<footer class="fine" style="max-width:1240px;margin:auto;padding:0 24px 24px"><details class="panel"><summary>试玩说明与验收项</summary><div class="divider"><p>建议从第 1 天玩到第 3 天。先按自己的直觉操作；卡住时再用提示。首关 5 分钟是目标，没有倒计时。</p><p><b>第 1 天：</b>找齐三段旋律、归位、备货开门、亲手完成一次交易。<br><b>第 2 天：</b>带着来信回访，选出同时满足两条证据的物件，看看新品如何改变备货。<br><b>第 3 天：</b>试第二种委托与仓库扩容，比较第二晚、第三晚的顾客需求。</p><p>玩完可记录：什么时候第一次想自己试一个办法？哪次停下来不知道下一步？找到新品后有没有想再玩一天？</p><p><b>已验证：</b>前三天可以连续玩通，错误归位和找零可以重试，单条证据无法交付，缺货不能用其他货品顶替，零资金时赶工可以恢复营业，刷新可续玩。<br>是否有顿悟感、经营是否好玩，留给本轮试玩判断。</p><p>节拍是独立试奏；完整章节 BOSS、高级商品资格与更多宇宙不在本版范围。</p></div></details>单文件离线试玩 · 进度保存在当前浏览器 · <button class="quiet" data-a="reset">重新开始试玩</button></footer>
+<script>
+'use strict';
+const $=s=>document.querySelector(s), store='cosmic-collector-v3-playtest', items={
+ candy:{n:'星星糖',i:'✦',cost:2,price:3},
+ paper:{n:'纸星星',i:'✧',cost:2,price:4},
+ moon:{n:'月亮糖',i:'☾',cost:3,price:5},
+ craft:{n:'手作纸星',i:'✶',cost:0,price:2}
+}, keys=Object.keys(items), sum=o=>Object.values(o).reduce((a,b)=>a+b,0), blank=()=>Object.fromEntries(keys.map(k=>[k,0]));
+const cards={candy:{n:'星星糖',shape:'星形',material:'糖制，可食用',i:'✦'},paper:{n:'纸星星',shape:'星形',material:'纸制，可折叠',i:'✧'},moon:{n:'月亮糖',shape:'月牙形',material:'糖制，可食用',i:'☾'},paperMoon:{n:'纸月亮',shape:'月牙形',material:'纸制，可折叠',i:'☽'}};
+const quests={
+ paper:{title:'给窗台留一颗星',letter:['要有五个尖角。','我想折起来，带回去装饰窗台。'],answer:'paper',shape:'星形',material:'纸制，可折叠',reward:3},
+ moon:{title:'月牙形的小甜点',letter:['希望它像一弯月牙。','这是给孩子吃的，不是装饰。'],answer:'moon',shape:'月牙形',material:'糖制，可食用',reward:3}
+};
+const memories={
+ sugar:{n:'糖星',i:'✦',tip:'左缘空白 · 右缘是圆',tones:[60,60,67,67]},
+ pond:{n:'水星',i:'≈',tip:'左缘是圆 · 右缘是菱形',tones:[69,69,67]},
+ cat:{n:'猫星',i:'✧',tip:'左缘是菱形 · 右缘空白',tones:[65,65,64,64,62,62,60]}
+}, slotDefs=[['起句','空白 → 圆','sugar'],['转句','圆 → 菱形','pond'],['收句','菱形 → 空白','cat']];
+const fresh=()=>({day:1,money:50,stage:'day',tab:'dream',muted:false,chapter:false,spots:{sugar:false,pond:false,cat:false},water:false,cat:false,slots:[null,null,null],stock:blank(),shelf:blank(),costs:{craft:0},unlock:[],explores:0,capacity:16,shelfCap:10,done:[],accepted:null,inspected:[],tested:[],proof:[],pick:null,rescue:false,penalty:0,night:null,week:{played:false,fc:false},bossBest:0,upgraded:false,staff:false,stats:{first:null,start:Date.now(),hints:0}});
+let s;
+try{s=JSON.parse(localStorage.getItem(store))||fresh()}catch{s=fresh()}
+let open=null, msg='她哼着一段没有唱完的旋律。走近女孩，听听她的故事。', hint=0, selected=null, wrongSlot=-1, invalidPay=false, audio, storageOK=true;
+const saves=()=>{try{localStorage.setItem(store,JSON.stringify(s));storageOK=true}catch{storageOK=false}};
+const week=()=>s.day%7===6||s.day%7===0, remaining=()=>Math.max(0,2-s.explores), allFound=()=>Object.values(s.spots).every(Boolean), counts=()=>sum(s.shelf)+sum(s.stock);
+const typeName=k=>items[k]?.n||'手作纸星', label=k=>typeName(k);
+const say=t=>{msg=t};
+function sound(notes=[72],spacing=.20){
+ if(s.muted)return;
+ try{audio??=new (window.AudioContext||window.webkitAudioContext)();audio.resume().catch(()=>{});
+ let now=audio.currentTime;notes.forEach((n,i)=>{let o=audio.createOscillator(),g=audio.createGain(),t=now+i*spacing;o.type='triangle';o.frequency.value=440*Math.pow(2,(n-69)/12);g.gain.setValueAtTime(.001,t);g.gain.exponentialRampToValueAtTime(.10,t+.025);g.gain.exponentialRampToValueAtTime(.001,t+.3);o.connect(g);g.connect(audio.destination);o.start(t);o.stop(t+.31)})}catch{}
+}
+const b=(title,a,opts={})=>'<button data-a="'+a+'"'+(opts.k!==undefined?' data-k="'+opts.k+'"':'')+(opts.cls?' class="'+opts.cls+'"':'')+(opts.disabled?' disabled':'')+'>'+title+'</button>';
+const panels=(body)=>'<section class="panel">'+body+'</section>';
+const header=(ey,title,sub)=>'<div class="eyebrow">'+ey+'</div><h2>'+title+'</h2><p class="sub">'+sub+'</p>';
+const p=(str)=>'<p>'+str+'</p>';
+function dayQueue(day=s.day,pen=s.penalty){
+ const regular=day===1?[{k:'candy',n:3},{k:'candy',n:1},{k:'candy',n:1},{k:'candy',n:1}]:
+ (day%2===0?[{k:'paper',n:2},{k:'candy',n:2},{k:'paper',n:1},{k:'candy',n:1}]:
+ [{k:'candy',n:2},{k:'moon',n:2},{k:'candy',n:1},{k:'paper',n:1}]);
+ let q=regular.slice(0,Math.max(2,regular.length-pen));
+ if(s.staff&&day!==1)q.push({k:'candy',n:1});
+ return q.map((o,i)=>({...o,tender:[10,20,10,10,10][i]}));
+}
+const needs=q=>q.reduce((a,o)=>(a[o.k]+=o.n,a),blank());
+function demandText(q){const n=needs(q);return keys.filter(k=>n[k]).map(k=>label(k)+' × '+n[k]).join('　·　')}
+function tonightQueue(){return s.night?.queue??queueWithCraft()}
+function nextDay(){let n=s.day+1;return n%7===6?n+2:n%7===0?n+1:n}
+function rescueGap(){
+ let cheapest=Math.min(...s.unlock.map(k=>items[k].cost));
+ let canBuy=Number.isFinite(cheapest)?Math.floor(s.money/cheapest):0;
+ return Math.max(0,10-counts()-canBuy);
+}
+function recommend(){
+ const n=needs(tonightQueue()), plan=blank(), qty=Object.fromEntries(keys.map(k=>[k,s.stock[k]+s.shelf[k]]));
+ let room=Math.max(0,s.capacity-sum(s.stock)),budget=s.money;
+ const cheapest=Math.min(...s.unlock.map(k=>items[k].cost));
+ const reserveOpening=Number.isFinite(cheapest)&&budget>=Math.max(0,10-sum(qty))*cheapest;
+ function add(k,target){
+  if(!s.unlock.includes(k))return;
+  const cost=items[k].cost;
+  let x=Math.max(0,Math.min(target-qty[k],room,Math.floor(budget/cost)));
+  while(reserveOpening&&x>0&&budget-x*cost<Math.max(0,10-sum(qty)-x)*cheapest)x--;
+  plan[k]+=x;qty[k]+=x;room-=x;budget-=x*cost;
+ }
+ for(const k of keys)if(n[k])add(k,n[k]);
+ let defaultKey=s.unlock.includes('candy')?'candy':s.unlock[0];
+ if(defaultKey)add(defaultKey,qty[defaultKey]+Math.max(0,10-sum(qty)));
+ // Warehoused goods still count toward opening once moved onto the shelf.
+ return {plan,cost:keys.reduce((t,k)=>t+plan[k]*items[k].cost,0),count:sum(plan)};
+}
+function hasCargo(k){return s.shelf[k]||s.stock[k]||s.unlock.includes(k)}
+function shopReady(){return s.chapter&&!week()&&(s.stage==='day'||s.stage==='prep')}
+function activeQuest(){return s.accepted?quests[s.accepted]:null}
+function availableQuests(){return (s.day===2?['paper']:['paper','moon']).filter(k=>!s.done.includes(k))}
+function mark(k){if(!s.spots[k]){s.spots[k]=true;s.stats.first??=Math.round((Date.now()-s.stats.start)/1000);sound(memories[k].tones.slice(0,2));say('背包新增「'+memories[k].n+'」。'+(allFound()?'街尾的钢琴亮了。':'旋律有了新的回应。'))}}
+function dreamArt(){
+ const water=s.water, cat=s.cat;
+ let stars=Array.from({length:34},(_,i)=>'<circle cx="'+(15+(i*193)%942)+'" cy="'+(11+(i*53)%182)+'" r="'+(i%4===0?2.1:1.1)+'" fill="'+(i%3===0?'#ffe4a7':'#c7d2f1')+'" opacity="'+(.35+(i%5)*.12)+'"/>').join('');
+ return '<svg viewBox="0 0 1000 465" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#1a2145"/><stop offset="1" stop-color="#565a78"/></linearGradient><linearGradient id="ground" x2="0" y2="1"><stop stop-color="#45465e"/><stop offset="1" stop-color="#252c44"/></linearGradient><radialGradient id="glow"><stop stop-color="#ffc86c" stop-opacity=".55"/><stop offset="1" stop-color="#ffc86c" stop-opacity="0"/></radialGradient><linearGradient id="water" x2="0" y2="1"><stop stop-color="#38587c"/><stop offset="1" stop-color="#223a62"/></linearGradient></defs><rect width="1000" height="465" fill="url(#sky)"/>'+stars+'<circle cx="805" cy="80" r="32" fill="#f2dda9"/><circle cx="819" cy="70" r="30" fill="#262e52"/><path d="M0 240L120 124 245 229 353 132 470 245 651 142 792 225 903 147 1000 219V340H0Z" fill="#373e5d"/><path d="M0 275L185 222 342 259 533 205 730 265 908 210 1000 238V465H0Z" fill="url(#ground)"/><path d="M0 431Q310 287 827 309L1000 378V465H0Z" fill="#777083" opacity=".56"/><path d="M-60 382Q245 334 521 356T1030 404" fill="none" stroke="#a69b98" stroke-opacity=".25" stroke-width="2"/><path d="M130 168L360 151 409 174V301L132 312Z" fill="#b79a8e"/><path d="M106 170L214 77 383 107 425 178Z" fill="#514459"/><path d="M214 77L238 112 132 175 106 170Z" fill="#685568"/><path d="M360 151L410 172V300L361 305Z" fill="#827484"/><rect x="246" y="198" width="65" height="106" rx="4" fill="#554451"/><rect x="258" y="213" width="41" height="41" rx="3" fill="#ebb480"/><path d="M279 213v41m-21-21h41" stroke="#6c4e54" stroke-width="4"/><rect x="151" y="201" width="63" height="48" rx="4" fill="#ffd491"/><path d="M182 200v50m-32-25h65" stroke="#886367" stroke-width="5"/><path d="M151 265H221V287H148Z" fill="#605263"/><rect x="176" y="158" width="111" height="20" rx="4" fill="#483c4e"/><text x="231" y="172" text-anchor="middle" fill="#f6d998" font-size="13">星光杂货店</text><ellipse cx="467" cy="230" rx="102" ry="123" fill="url(#glow)"/><path d="M467 313V187q0-21 25-21" fill="none" stroke="#443f4d" stroke-width="6"/><path d="M484 168l7-12 15 2 6 14-5 17-18-1Z" fill="#f0c385" stroke="#403747" stroke-width="3"/><path d="M890 283l19-120 12 1 8 121Z" fill="#544759"/><path d="M852 186l18-72 45-39 54 50 10 65-53 39Z" fill="#455269"/><path d="M850 187l29-38 47 80-70-20Z" fill="#37485e"/><ellipse cx="507" cy="369" rx="141" ry="44" fill="#807884"/><ellipse cx="507" cy="368" rx="133" ry="37" fill="url(#water)"/><path d="M395 370q70 16 130 8t88-16" fill="none" stroke="#7497af" stroke-opacity=".35" stroke-width="2"/>'+(water?'<path d="M510 339l5 13 14 4-14 4-5 13-4-13-14-4 14-4Z" fill="#ffe6a8" class="twinkle"/>':'<g class="water-ripple" fill="none" stroke="#a1c0cf" stroke-width="1.8"><ellipse cx="505" cy="362" rx="30" ry="7"/><ellipse cx="505" cy="362" rx="53" ry="13"/><ellipse cx="505" cy="362" rx="75" ry="20"/></g>')+
+ '<path d="M407 347v-34" stroke="#63515b" stroke-width="5"/><path d="M407 314q26 9 47 '+(water?'4':'34')+'" fill="none" stroke="#ddc19b" stroke-width="3"/><path d="M209 327l51-4 4-28-52 4Z" fill="#705264"/><path d="M218 295l13-35 17 2 12 32Z" fill="#be7880"/><circle cx="239" cy="251" r="13" fill="#efd0aa"/><path d="M227 249q5-20 24-7l2 9Z" fill="#674955"/><path d="M230 284l19-6" stroke="#eacaa7" stroke-width="5" stroke-linecap="round"/><path d="M672 299l13-53 23 2 13 47Z" fill="#9e8cac"/><circle cx="697" cy="230" r="14" fill="#e5c19b"/><path d="M683 230q0-19 17-16l13 12-4 14Z" fill="#625064"/><ellipse cx="758" cy="313" rx="28" ry="7" fill="'+(cat?'#b38ea1':'#64576e')+'"/><g transform="translate('+(cat?'752 303':'709 313')+')"><ellipse cx="0" cy="0" rx="15" ry="8" fill="#e5d3bf"/><path d="M6-5l2-9 7 4 6-4 2 13Z" fill="#4a4458"/><path d="M-15 1q-14-6-13 4" stroke="#4a4458" stroke-width="3" fill="none"/>'+(cat?'<path d="M-5-7l2 5 6 1-5 3 1 5-4-3-5 2 2-5-3-4 5 1Z" fill="#8e6275"/>':'')+'</g>'+
+ (allFound()?'<ellipse cx="892" cy="298" rx="82" ry="100" fill="url(#glow)"/><path d="M844 300q17-24 51-12l22 11-4 17h-70Z" fill="#282334" stroke="#b09385" stroke-width="2"/><path d="M851 317v21m54-21v21" stroke="#282334" stroke-width="5"/><path d="M848 311h42" stroke="#f4d9a1" stroke-width="3"/>':'')+
+ '</svg>';
+}
+function spot(title,id,x,y,done){return '<button class="spot '+(open===id?'active ':'')+(done?'solved':'')+'" style="left:'+x+'%;top:'+y+'%" data-a="open" data-k="'+id+'">'+title+'</button>'}
+function dream(){
+ if(s.tab==='coda')return panels(header('音乐宇宙 · 第一章完成','这首曲子有了结尾','妈妈牵起女孩的手。她们走过已经平静的水池，小猫蜷在垫子上。')+'<div class="notice"><h3>✦ 收藏手记：星星糖</h3><p>已记录首次发现，并解锁星星糖采购。你带回的是售卖资格，背包中的旋律会一直保留。</p></div><div class="row">'+b('带着发现回小店','tab',{k:'shop',cls:'primary'})+'</div>');
+ if(s.chapter){
+  if(week())return weekendView();
+  return panels(header('白天 · 回访', '旧街角，新的愿望', '顾客来信让同一个地方出现新的观察目标。')+questSection()+ '<div class="row divider">'+b('返回小店','tab',{k:'shop',cls:'primary'})+b('试奏节拍','rhythm',{k:'boss'})+'</div>');
+ }
+ return panels('<div class="eyebrow">音乐宇宙 · 第一章</div><h1>梦里遗落的星星</h1><p class="sub">小女孩在等妈妈收工。她说，曲子是星星教给她的。</p><div class="scene">'+dreamArt()+
+ spot((s.spots.sugar?'✓ ':'')+'女孩', 'girl',23,64,s.spots.sugar)+spot((s.spots.pond?'✓ ':'')+'池边', 'pond',49,80,s.spots.pond)+spot((s.spots.cat?'✓ ':'')+'黑白猫','cat',73,65,s.spots.cat)+(allFound()?spot('♫ 钢琴','piano',89,55,s.slots.every(Boolean)):'')+'<span class="scene-note">观察场景，试着改变一件小事</span></div>'+dreamDialog()+'<div class="row divider">'+b('给我一点提示','hint',{cls:'quiet'})+'</div>'+hintView());
+}
+function dreamDialog(){
+ if(open==='girl')return '<div class="dialog"><h3>女孩 · 杂货店门外</h3>'+p(s.spots.sugar?'女孩：“你听见了吗？这条街上还有别的星星。”':'女孩：“妈妈忙完我们就回家。你要不要尝尝星星的味道？”')+(!s.spots.sugar?'<div class="row">'+b('展开星星糖的糖纸','sugar',{cls:'primary'})+'</div>':'')+'</div>';
+ if(open==='pond')return '<div class="dialog"><h3>池边 · 水里的光</h3>'+p(s.water?'水面静下来，倒影终于聚成一颗完整的星星。':'水面有一团碎光。每当湿绳碰到水面，波纹就从绳梢散开。池边还有一枚空挂钩。')+'<div class="row">'+(!s.water?b('把湿绳挂回空钩','water')+b('伸手碰碎光','pond-try'):s.spots.pond?'已收下倒影的旋律。':b('收下倒影的旋律','pond',{cls:'primary'}))+'</div></div>';
+ if(open==='cat')return '<div class="dialog"><h3>猫 · 晃来晃去的斑纹</h3>'+p(s.cat?'小猫窝在垫子里，把背上的浅色星纹转了过来。':'小猫一直蹭着妈妈。妈妈小声说：“它找不到那块熟悉的软垫了。”空篮子旁搭着一块旧软垫。')+'<div class="row">'+(!s.cat?b('把软垫放进篮子','cat-bed')+b('追上去看猫背','cat-try'):s.spots.cat?'已记下猫纹的旋律。':b('记下猫纹的旋律','cat',{cls:'primary'}))+'</div></div>';
+ if(open==='piano'&&allFound())return '<div class="dialog"><h3>聚光灯下的钢琴</h3><p>试听片段，再把能接起来的边缘放进对应的空位。前后能拼成一段曲子。</p><div class="row">'+['pond','cat','sugar'].map(k=>b(memories[k].i+' '+memories[k].n+' · '+memories[k].tip,'fragment',{k,cls:selected===k?'chosen':''})).join('')+'</div><div class="slots">'+slotDefs.map(([n,h],i)=>b(n+'<br><small>'+h+'</small><br>'+(s.slots[i]?'✓ '+memories[s.slots[i]].n:wrongSlot===i?'<span class="bad">边缘不吻合</span>':'待归位'),'slot',{k:i,cls:s.slots[i]?'chosen':''})).join('')+'</div><div class="row">'+b('撤回最后一段','undo',{disabled:!s.slots.some(Boolean)})+b('演奏并带回发现','finish',{cls:'primary',disabled:!s.slots.every(Boolean)})+'</div></div>';
+ return '<div class="dialog"><h3>晚风里有一段曲子</h3><p>女孩、小池和黑白猫都在街角。点场景中的位置开始观察。</p></div>';
+}
+function hintView(){if(!hint)return '';let h=allFound()?['比较片段边缘与三个空位的形状。','先选中一个片段，再点想放入的空位。','起句放糖星，转句放水星，收句放猫星。']:!s.spots.sugar?['女孩手里的糖纸闪着光。','靠近女孩，看看她递来的东西。','打开糖纸，就能获得糖星。']:!s.spots.pond?['留意水纹是从哪里出现的。','湿绳和挂钩似乎有关。','把湿绳挂回去，再看倒影。']:['小猫为什么不愿意安静待着？','看看篮子旁的软垫。','把软垫放入篮子，再看星纹。'];return '<div class="hint">'+h[hint-1]+'</div>'}
+function questSection(){
+ if(s.day===1)return '<div class="notice">今晚，把星星糖摆上货架。打烊后会收到一封新来信。</div>';
+ if(!s.accepted){let qs=availableQuests();
+  if(!qs.length)return '<div class="notice">本轮试玩的两封委托已完成。商品采购与仓库扩容已记录。</div>';
+  return '<div class="cards">'+qs.map(k=>'<div class="card"><h3>'+quests[k].title+'</h3><p class="small">'+quests[k].letter.join(' ')+'</p>'+b('接下委托','accept',{k,disabled:!remaining()||s.stage!=='day'})+'</div>').join('')+'</div><p class="fine">回访占用一次白天探索。可以先营业，不接委托没有额外处罚。</p>';
+ }
+ let q=activeQuest();
+ return '<div class="scene">'+dreamArt()+'<span class="scene-note">回访 · 杂货店门外的货摊</span></div><div class="notice"><h3>'+q.title+'</h3><p>'+q.letter[0]+'<br>'+q.letter[1]+'</p></div><p class="sub">查看货摊上的物件，再选择分别支持两条要求的证据。</p><div class="candidates">'+Object.entries(cards).map(([k,c])=>b(c.i+' '+c.n+(s.inspected.includes(k)?'<br><small>'+c.shape+(s.tested?.includes(k)?' · '+c.material:'')+'</small>':'<br><small>尚未查看</small>'),'inspect',{k,cls:s.pick===k?'chosen':''})).join('')+'</div>'+(s.pick?'<div class="card"><h3>提交「'+cards[s.pick].n+'」的两条证据</h3><div class="row">'+b(cards[s.pick].shape,'proof',{k:'shape',cls:s.proof.includes('shape')?'chosen':''})+(s.tested?.includes(s.pick)?b(cards[s.pick].material,'proof',{k:'material',cls:s.proof.includes('material')?'chosen':''}):b('检查材质','testMaterial'))+b('交付委托','submit',{cls:'primary',disabled:s.proof.length!==2})+'</div></div>':'')+'<div class="row divider">'+b('暂放这封委托','abandon',{cls:'quiet'})+'</div>';
+}
+function shelfView(){let a=keys.flatMap(k=>Array(s.shelf[k]).fill(k));return '<div class="shelf" aria-label="货架">'+Array.from({length:s.shelfCap},(_,i)=>'<div class="cell '+(a[i]?'filled':'')+'" title="'+(a[i]?label(a[i]):'空位')+'">'+(a[i]?items[a[i]].i:'·')+'</div>').join('')+'</div>'}
+function shop(){
+ if(!s.chapter)return panels(header('星光小店','还没有可卖的发现','先在梦里完成旋律，带回你的第一种商品。')+b('回到梦境','tab',{k:'dream',cls:'primary'}));
+ if(week())return weekendView();
+ if(s.stage==='settled')return settlement();
+ let q=tonightQueue(), plan=recommend(), prep=s.stage==='prep', live=s.stage==='open', gap=rescueGap();
+ if(live)return panels(header('夜晚 · 营业','顾客来到柜台','看清顾客要什么；另一种商品不能自动顶替。')+nightView());
+ let products=keys.filter(hasCargo);
+ let fixedText='今晚需求：<b>'+demandText(q)+'</b>。'+(q.some(o=>!s.unlock.includes(o.k)&&!s.stock[o.k]&&!s.shelf[o.k]&&o.k!=='craft')?' 有商品还未发现，可以先营业，也可以回访来信。':'');
+ return panels(header(prep?'傍晚 · 备货':'白天 · 星光小店','今晚卖什么？','采购先入仓，上架再开门；首轮试玩开门要求货架至少 10 件。')+'<div class="notice" id="demand">'+fixedText+'</div>'+(!prep&&s.day>1?'<div class="row">'+b('查看来信与回访','tab',{k:'dream'})+'</div>':'')+
+ '<div class="metrics"><div class="metric"><b>'+sum(s.shelf)+' / '+s.shelfCap+'</b><small>已上架</small></div><div class="metric"><b>'+sum(s.stock)+' / '+s.capacity+'</b><small>仓库</small></div><div class="metric"><b>'+q.length+'</b><small>预期顾客</small></div></div>'+shelfView()+
+ '<div class="row">'+b('一键按需求采购 · '+plan.cost+' 币','buyPlan',{disabled:!plan.count})+b('一键上架','stockAll',{disabled:!sum(s.stock)||sum(s.shelf)>=s.shelfCap})+b('一键撤下','unshelfAll',{disabled:!sum(s.shelf)||sum(s.stock)>=s.capacity})+'</div><p class="fine">'+(plan.count?'建议采购：'+keys.filter(k=>plan.plan[k]).map(k=>label(k)+' × '+plan.plan[k]).join(' · ')+'。':'当前无可追加的推荐采购。')+'</p><div class="divider">'+products.map(k=>{let it=items[k];return '<div class="product"><div><b>'+it.i+' '+it.n+'</b><div class="fine">'+(k==='craft'?'工坊产出':'进 '+it.cost+' 币')+' · 售 '+it.price+' 币 · 仓 '+s.stock[k]+' · 架 '+s.shelf[k]+'</div></div><div class="row">'+(s.unlock.includes(k)?b('采购 +1','buy',{k,disabled:s.money<it.cost||sum(s.stock)>=s.capacity}):'')+b('上架 +1','shelf',{k,disabled:!s.stock[k]||sum(s.shelf)>=s.shelfCap})+b('撤下 −1','unshelf',{k,disabled:!s.shelf[k]||sum(s.stock)>=s.capacity})+'</div></div>'}).join('')+'</div>'+
+ (gap&&!s.rescue?'<div class="notice"><h3>没钱凑齐开门货量？</h3><p>可以先把现有货架摆满，再用赶工补齐剩下的数量。赶工免费，今天的探索会结束；来收货的邻居会购买手作货。</p>'+b('赶工补到 10 件','rescue',{cls:'primary'})+'</div>':'')+
+ '<div class="row divider">'+b('开门营业','startNight',{cls:'primary',disabled:sum(s.shelf)<10})+b('去手作工坊','tab',{k:'workshop'})+b('今晚休息','rest',{cls:'quiet'})+'</div>'+(sum(s.shelf)<10?'<p class="fine">还差 '+(10-sum(s.shelf))+' 件上架才可以开门。</p>':'')+
+ (s.penalty?'<p class="fine">上一营业日有需求未满足，今晚少 1 位常规顾客。惩罚不叠加。</p>':''));
+}
+function createNight(queue){return {queue,index:0,revenue:0,expense:0,units:0,miss:0,logs:[],served:0,rest:false};}
+function nightView(){
+ let n=s.night,o=n.queue[n.index],due=items[o.k].price*o.n,change=o.tender-due;
+ return '<div class="queue" aria-label="顾客队列">'+n.queue.map((x,i)=>'<span class="'+(i===n.index?'now':i<n.index?'done':'')+'">'+(i<n.index?'✓ ':'')+items[x.k].i+' '+label(x.k)+'×'+x.n+'</span>').join('')+'</div>'+shelfView()+
+ '<div class="notice"><h3>第 '+(n.index+1)+' 位 · 想要 '+label(o.k)+' × '+o.n+'</h3>'+(s.shelf[o.k]>=o.n?
+ '<p>应收 <b>'+due+'</b> 币，顾客付 <b>'+o.tender+'</b> 币。应找多少？</p><div class="row">'+Array.from(new Set([Math.max(0,change-1),change,change+2])).map(c=>b(c+' 币','change',{k:c})).join('')+'</div>'+(invalidPay?'<p class="bad">找零不对。用顾客付的钱减去应收金额，再试一次。</p>':''):
+ '<p class="bad">当前货架只有 '+s.shelf[o.k]+' 件这类商品。</p><div class="row">'+b('从仓库补到这单数量','replenish',{disabled:s.stock[o.k]<o.n-s.shelf[o.k]||s.shelfCap-sum(s.shelf)<o.n-s.shelf[o.k]})+b('告诉顾客缺货','miss')+'</div>')+'</div>'+
+ (n.served>0?'<div class="row">'+b('快速接待剩余顾客','assist',{cls:'quiet'})+'</div><p class="fine">按相同需求结算；缺货的订单仍记为未满足。</p>':'')+
+ '<div class="metrics"><div class="metric"><b>'+n.revenue+'</b><small>营业额</small></div><div class="metric"><b>'+(n.revenue-n.expense)+'</b><small>已售毛利</small></div><div class="metric"><b>'+n.miss+'</b><small>未满足订单</small></div></div>'+
+ (n.logs.length?'<ul class="sale-log">'+n.logs.map(t=>'<li>'+t+'</li>').join('')+'</ul>':'');
+}
+function settlement(){
+ let n=s.night;
+ return panels(header('夜晚 · 打烊','来自柜台的结算信',n.rest?'今晚没有营业。已有库存和发现会保留。':n.reason==='empty'?'货架已清空，小店自动打烊。':'柜台的队伍散了，灯光慢慢暗下来。')+
+ '<div class="metrics"><div class="metric"><b>'+n.revenue+'</b><small>营业额</small></div><div class="metric"><b>'+(n.revenue-n.expense)+'</b><small>已售毛利</small></div><div class="metric"><b>'+n.miss+'</b><small>未满足订单</small></div></div>'+
+ '<div class="notice"><h3>'+(s.day===1?'给窗台留一颗星':s.day===2?'月牙形的小甜点':'下一营业日')+'</h3><p>'+(s.day===1?'“要有五个尖角。我想折起来，带回去装饰窗台。”':s.day===2?'“希望它像一弯月牙。这是给孩子吃的，不是装饰。”':'商店会延续现有货品与需求。')+'</p><p class="fine">第 '+nextDay()+' 天预计需求：'+demandText(dayQueue(nextDay(),s.penalty))+'。</p></div>'+
+ (n.miss?'<p class="fine">下一营业日少 1 位常规顾客。下一晚无缺货即可恢复。</p>':'')+
+ (n.logs.length?'<details><summary>查看交易记录</summary><ul class="sale-log">'+n.logs.map(t=>'<li>'+t+'</li>').join('')+'</ul></details>':'')+
+ '<div class="row divider">'+b('翻到下一天','advance',{cls:'primary'})+'</div>');
+}
+function workshop(){
+ if(!s.chapter||week()||!shopReady())return panels(header('手作工坊','工坊暂未开放','完成第一章后，在工作日开店前可以制作。'));
+ return panels(header('星光手作','给小店补一点货','普通手作占一次白天探索；缺少开门资金时，可在备货区使用赶工。')+
+ '<div class="card"><h3>✶ 折两颗手作纸星</h3><p>不花宇宙币。邻居会为这两颗纸星来店；售价每件 '+items.craft.price+' 币。</p>'+b('制作 2 件 · 占 1 次探索','craft',{cls:'primary',disabled:s.rescue||!remaining()||s.stage!=='day'||s.crafted||sum(s.stock)+2>s.capacity})+'</div><div class="row divider">'+b('回店备货','tab',{k:'shop'})+'</div>');
+}
+function archive(){
+ return panels(header('收藏家手记','发现与店铺成长','收藏记录会一直保留；你卖出的是可补货的商品。')+
+ '<div class="cards">'+['candy','paper','moon'].map(k=>'<div class="card"><h3>'+items[k].i+' '+items[k].n+'</h3><p>'+ (s.unlock.includes(k)?'<span class="good">已发现 · 可采购</span>':'尚未发现')+'</p><small>'+({candy:'完成梦境中的钢琴归位',paper:'完成窗台委托',moon:'完成月牙甜点委托并获得仓储扩容'})[k]+'</small></div>').join('')+'</div>'+
+ '<div class="cards"><div class="card"><h3>货架扩展</h3><p>货架容量 '+s.shelfCap+' 件</p>'+b(s.upgraded?'已扩展':'花 25 币 · 增加 2 格','upgrade',{disabled:s.upgraded||s.money<25||!s.chapter||s.day<3||!shopReady()})+'</div><div class="card"><h3>仓储扩容</h3><p>仓库容量 '+s.capacity+' 件</p><small>完成月牙甜点委托扩容，不能直接用钱购买。</small></div><div class="card"><h3>雇佣店员</h3><p>工作日额外吸引 1 位顾客</p>'+b(s.staff?'店员已到岗':'花 65 币 · 雇佣','hire',{disabled:s.staff||s.money<65||!s.chapter||s.day<3||!shopReady()})+'</div></div>');
+}
+let rMode='boss', run=null, raf=0, result='';
+const chart=[0.9,1.5,2.1,2.7,3.6,4.2,4.8,5.4];
+function weekendView(){return panels(header('周末 · 奖励日','把街角的旋律弹一遍','本轮周末仅开放可选节拍试玩，跳过不会影响图鉴、库存或下次营业。')+
+ '<div class="row">'+b('开始一局节拍','rhythm',{k:'week',cls:'primary'})+b('跳到下一天','advance',{cls:'quiet'})+'</div><p class="fine">第一次完成有 2 币；当天第一次全连再给 1 币。可以反复练习。</p>')}
+function rhythmView(){
+ return panels(header(rMode==='week'?'周末 · 奖励日':'音乐宇宙 · 节拍试奏','星光节拍','音符到达金色判定线时按空格或点下方按钮。失误后可以直接跟上下一拍。')+
+ '<div class="strike" id="track" aria-label="节拍轨道"></div><p id="beat-info" class="good" role="status">'+(result||'准备好后开始；开启声音可以听见节拍。')+'</p>'+
+ '<div class="row">'+b('开始 8 拍','rhythmStart',{cls:'primary',disabled:!!run})+b('击拍 · 空格','tap',{disabled:!run})+b('返回','rhythmExit',{cls:'quiet'})+'</div><p class="fine">这是一段独立试奏。过关、采购与回访不要求节拍评分。</p>');
+}
+function step(now){
+ if(!run)return;
+ let t=(now-run.start)/1000;
+ for(let i=0;i<chart.length;i++){
+  if(!run.state[i]&&t>chart[i]+.21){run.state[i]='miss';run.note='错过 · 跟上下一个音符'}
+  if(!run.sounded[i]&&t>=chart[i]){run.sounded[i]=true;sound([i%2?67:72])}
+ }
+ let track=$('#track');if(!track)return stopRhythm();
+ track.innerHTML=chart.map((n,i)=>{let x=78-(n-t)*59;return !run.state[i]&&x>=-4&&x<=101?'<span class="note" style="left:'+x+'%">✦</span>':''}).join('');
+ $('#beat-info').textContent=run.note+' ｜ '+run.state.filter(x=>x==='hit').length+' / '+chart.length;
+ if(t>chart.at(-1)+.35){let hits=run.state.filter(x=>x==='hit').length, reward=0;if(rMode==='week'){if(!s.week.played){s.week.played=true;reward+=2}if(hits===chart.length&&!s.week.fc){s.week.fc=true;reward++}s.money+=reward}else{s.bossBest=Math.max(s.bossBest,hits)}
+  result='完成 · 命中 '+hits+' / '+chart.length+(hits===chart.length?' · 全连':'')+(reward?' · 获得 '+reward+' 币':'');stopRhythm();say(result);render();return;}
+ raf=requestAnimationFrame(step);
+}
+function stopRhythm(){cancelAnimationFrame(raf);run=null}
+function tap(){
+ if(!run)return;
+ let t=(performance.now()-run.start)/1000, i=chart.findIndex((n,j)=>!run.state[j]&&Math.abs(t-n)<=.21);
+ if(i<0){run.note='没对上 · 等星光来到金线';return;}
+ run.state[i]='hit';run.note='击中！';sound([76]);
+}
+function side(){
+ let found=Object.entries(memories).map(([k,v])=>'<div class="token '+(s.spots[k]?'found':'')+'"><i>'+(s.spots[k]?v.i:'·')+'</i>'+(s.spots[k]?v.n:'待发现')+'</div>').join('');
+ let objective=!s.chapter?(allFound()?'到钢琴前，把三段声音接起来。':s.spots.sugar?'让这段曲子接着唱：还有星星留在街角。':'和女孩聊聊，看看她递给你什么。'):s.stage==='settled'?'读结算信，决定下一次探索。':week()?'任选一局节拍，或者休息一天。':s.stage==='open'?'看清顾客需求，交货并找零。':s.accepted?'完成来信中的两条要求。':s.day===1?'用刚发现的商品，试着开门营业。':'读来信，再决定今天要探索还是备货。';
+ return '<div class="panel"><div class="eyebrow">当前目标</div><p>'+objective+'</p><small>'+(s.chapter&&!week()?'今日探索余 '+remaining()+' 次':'观察 · 尝试 · 聆听')+'</small></div><div class="panel"><div class="eyebrow">随身背包</div><div class="pocket">'+found+'</div><p class="fine" style="margin-top:8px">旋律和收藏不会因卖出商品而消失。</p></div><div class="live" id="live" role="status" aria-live="polite">'+msg+'</div>';
+}
+function render(){
+ saves();
+ $('#day').textContent='第 '+s.day+' 天'+(week()?' · 周末':s.stage==='open'?' · 夜晚':'');
+ $('#cash').textContent='✦ '+s.money+' 币';
+ $('#mute').textContent=s.muted?'声音：关':'声音：开';
+ let tabs=[['dream',s.chapter?'回访来信':'梦境街角'],['shop','星光小店'],['workshop','手作工坊'],['archive','收藏手记']];
+ $('#tabs').innerHTML=tabs.map(([k,n])=>'<button data-a="tab" data-k="'+k+'" '+(s.tab===k?'aria-current="page"':'')+' '+(!s.chapter&&k!=='dream'?'disabled':'')+'>'+n+'</button>').join('');
+ $('#view').innerHTML=(s.tab==='rhythm'?rhythmView():s.tab==='shop'?shop():s.tab==='workshop'?workshop():s.tab==='archive'?archive():dream())+(!storageOK?'<p class="notice">浏览器未允许本地存档。保持页面打开即可继续本次试玩。</p>':'');
+ $('#side').innerHTML=side();
+}
+function buy(k,num){
+ if(!shopReady()||!s.unlock.includes(k))return 0;
+ let it=items[k],x=Math.max(0,Math.min(num,s.capacity-sum(s.stock),Math.floor(s.money/it.cost)));
+ s.money-=x*it.cost;s.stock[k]+=x;return x;
+}
+function move(k,num,toShelf){
+ if(!keys.includes(k))return 0;
+ let [src,dst,cap]=toShelf?[s.stock,s.shelf,s.shelfCap]:[s.shelf,s.stock,s.capacity];
+ let x=Math.max(0,Math.min(src[k],num,cap-sum(dst)));src[k]-=x;dst[k]+=x;return x;
+}
+function prepare(){if(s.stage==='day')s.stage='prep';}
+function finishNight(reason){
+ s.night.reason=reason;s.stage='settled';s.penalty=s.night.rest?s.penalty:(s.night.miss?1:0);
+ say(s.night.rest?'休息一晚。':'打烊：营业额 '+s.night.revenue+' 币，已售毛利 '+(s.night.revenue-s.night.expense)+' 币。');
+}
+function order(ok){
+ let n=s.night,o=n?.queue[n.index];if(s.stage!=='open'||!o)return;
+ invalidPay=false;
+ if(ok&&s.shelf[o.k]>=o.n){s.shelf[o.k]-=o.n;let income=o.n*items[o.k].price;s.money+=income;n.revenue+=income;n.expense+=o.n*items[o.k].cost;n.units+=o.n;n.served++;n.logs.push(label(o.k)+' × '+o.n+'，成交 '+income+' 币。');say('成交：'+label(o.k)+' × '+o.n+'，收到 '+income+' 币。');sound([72,76]);}
+ else{n.miss++;n.logs.push(label(o.k)+' × '+o.n+'，缺货未成交。');say('缺货已记入结算，下一营业日预计少一位顾客。');}
+ n.index++;
+ if(n.index>=n.queue.length)finishNight('done');
+ else if(!sum(s.shelf)){for(const x of n.queue.slice(n.index)){n.miss++;n.logs.push(label(x.k)+' × '+x.n+'，打烊未成交。')}n.index=n.queue.length;finishNight('empty');}
+}
+function queueWithCraft(){
+ let q=dayQueue(),quantity=s.stock.craft+s.shelf.craft, requests=[];
+ for(let left=quantity;left>0;){let n=Math.min(left,3);requests.push({k:'craft',n,tender:10});left-=n}
+ return s.rescue?requests.concat(q):q.concat(requests);
+}
+function perform(a,k){
+ switch(a){
+ case 'mute':s.muted=!s.muted;if(!s.muted)sound();break;
+ case 'reset':if(confirm('重新开始本版试玩？本版进度会清空。')){s=fresh();stopRhythm();open=null;hint=0;selected=null;wrongSlot=-1;invalidPay=false;result='';say('她哼着一段没有唱完的旋律。走近女孩，听听她的故事。')}break;
+ case 'tab':
+  if(!s.chapter&&k!=='dream')break;
+  if(s.stage==='open'&&k!=='shop'){say('先接待完柜台的顾客。');break;}
+  stopRhythm();s.tab=k;break;
+ case 'open':open=k;hint=0;if(k==='girl'&&!s.spots.sugar)sound([60,60,67]);break;
+ case 'sugar':if(open==='girl')mark('sugar');break;
+ case 'water':if(open==='pond'&&!s.water){s.water=true;sound([64,67]);say('绳梢离开水面，倒影稳定下来。')}break;
+ case 'pond-try':say('水纹更密了。看看波纹从哪里开始。');break;
+ case 'pond':if(open==='pond'&&s.water)mark('pond');break;
+ case 'cat-bed':if(open==='cat'&&!s.cat){s.cat=true;sound([65,62]);say('小猫坐进软垫，露出背上的星纹。')}break;
+ case 'cat-try':say('小猫躲到妈妈身边了。也许可以先让它觉得舒服。');break;
+ case 'cat':if(open==='cat'&&s.cat)mark('cat');break;
+ case 'hint':hint=Math.min(3,hint+1);s.stats.hints++;break;
+ case 'fragment':if(allFound()&&memories[k]){selected=k;wrongSlot=-1;sound(memories[k].tones);say('选中「'+memories[k].n+'」。选择一个位置放入。')}break;
+ case 'slot':{
+  let i=Number(k);if(!selected){say('先选择要放入的旋律片段。');break;}
+  if(slotDefs[i]?.[2]===selected){s.slots[i]=selected;s.lastSlot=i;wrongSlot=-1;selected=null;sound([72,76]);say('这一段接上了。')}else{wrongSlot=i;sound([53]);say('这个位置的边缘没接上；放对的片段仍在。')}break;
+ }
+ case 'undo':if(s.slots.some(Boolean)){let i=s.slots[s.lastSlot]?s.lastSlot:s.slots.findLastIndex(Boolean);s.slots[i]=null;wrongSlot=-1;say('已撤回一段旋律。')}break;
+ case 'finish':if(allFound()&&s.slots.every(Boolean)&&!s.chapter){s.chapter=true;s.explores=1;s.unlock.push('candy');s.money+=2;sound(Object.values(memories).flatMap(m=>m.tones),.23);s.tab='coda';say('曲子唱完了。妈妈牵着女孩回家，你带回星星糖的发现和 2 币。')}break;
+ case 'accept':if(s.chapter&&s.stage==='day'&&remaining()&&!week()&&availableQuests().includes(k)&&!s.accepted){s.explores++;s.accepted=k;s.inspected=[];s.tested=[];s.proof=[];s.pick=null;say('回到旧街角。带着这封信查看货摊。')}break;
+ case 'inspect':if(s.accepted&&cards[k]){if(!s.inspected.includes(k))s.inspected.push(k);s.pick=k;s.proof=[];say('看清了「'+cards[k].n+'」的形状。还可以检查材质。')}break;
+ case 'testMaterial':if(s.accepted&&s.pick){s.tested??=[];if(!s.tested.includes(s.pick))s.tested.push(s.pick);let c=cards[s.pick];say(c.material.startsWith('纸')?'物件轻轻弯折，边缘能留下折痕。':'糖纸打开了，露出硬糖的光泽。');}break;
+ case 'proof':if(s.accepted&&s.pick&&['shape','material'].includes(k)&&(k==='shape'||s.tested?.includes(s.pick))){s.proof=s.proof.includes(k)?s.proof.filter(x=>x!==k):s.proof.concat(k)}break;
+ case 'submit':{
+  let q=activeQuest(),c=cards[s.pick];if(!q||!c||s.proof.length!==2)break;
+  if(c.shape!==q.shape||c.material!==q.material){say(c.shape===q.shape?'形状对了，但材质不符合第二条。':'材质或形状对不上，请对照来信再选。');break;}
+  if(!s.done.includes(s.accepted)){s.done.push(s.accepted);s.unlock.push(q.answer);s.money+=q.reward;if(q.answer==='moon')s.capacity+=4;sound([67,72,76]);say('委托完成：可采购'+label(q.answer)+'，获得 '+q.reward+' 币。'+(q.answer==='moon'?' 仓库增加 4 格。':''));
+  }s.accepted=null;s.pick=null;break;
+ }
+ case 'abandon':s.accepted=null;s.pick=null;s.proof=[];say('暂放来信。已用的探索次数不会退回，没有信誉惩罚。');break;
+ case 'buy':if(buy(k,1))say('采购了 1 件'+label(k)+'。');break;
+ case 'buyPlan':{let q=recommend(),n=keys.reduce((t,k)=>t+buy(k,q.plan[k]),0);if(n)say('按需求采购 '+n+' 件，先入仓。');break;}
+ case 'shelf':if(shopReady()&&move(k,1,true))say(label(k)+'已上架。');break;
+ case 'unshelf':if(shopReady()&&move(k,1,false))say(label(k)+'已撤回仓库。');break;
+ case 'stockAll':if(shopReady()){let n=needs(tonightQueue());for(let k of keys)move(k,Math.max(0,n[k]-s.shelf[k]),true);for(let k of keys)move(k,s.stock[k],true);say('优先按今晚需求上架，剩余货位再放其他商品。');}break;
+ case 'unshelfAll':if(shopReady()){for(let k of keys)move(k,s.shelf[k],false);say('能入仓的商品已撤下。');}break;
+ case 'craft':if(shopReady()&&s.stage==='day'&&remaining()&&!s.crafted&&sum(s.stock)+2<=s.capacity){s.explores++;s.stock.craft+=2;s.crafted=true;say('手作纸星 2 件已入仓。今晚有邻居来收。');}break;
+ case 'rescue':if(shopReady()&&!s.rescue&&rescueGap()>0){
+  let n=Math.max(0,10-counts());s.stock.craft+=n;s.rescue=true;s.explores=2;s.accepted=null;prepare();say('赶工完成：'+n+' 件手作纸星入仓。今天的邻居会先来收货。');
+ }break;
+ case 'startNight':if(shopReady()&&sum(s.shelf)>=10){s.accepted=null;s.stage='open';s.night=createNight(queueWithCraft());s.tab='shop';say('开门了。看看第一位顾客想买什么。')}break;
+ case 'replenish':if(s.stage==='open'){let o=s.night.queue[s.night.index],n=o.n-s.shelf[o.k];if(n>0&&s.stock[o.k]>=n&&s.shelfCap-sum(s.shelf)>=n){move(o.k,n,true);say('已经为这位顾客补齐商品。')}}break;
+ case 'change':if(s.stage==='open'){let o=s.night.queue[s.night.index];if(s.shelf[o.k]>=o.n){if(+k===o.tender-items[o.k].price*o.n)order(true);else{invalidPay=true;say('没有扣库存或收钱。找零还可以重试。')}}}break;
+ case 'miss':if(s.stage==='open'){let o=s.night.queue[s.night.index];if(s.shelf[o.k]<o.n)order(false)}break;
+ case 'assist':if(s.stage==='open'&&s.night.served>0)while(s.stage==='open'){let o=s.night.queue[s.night.index],gap=o.n-s.shelf[o.k];if(gap>0&&s.stock[o.k]>=gap&&s.shelfCap-sum(s.shelf)>=gap)move(o.k,gap,true);order(s.shelf[o.k]>=o.n)}break;
+ case 'rest':if(shopReady()){s.accepted=null;s.night=createNight([]);s.night.rest=true;finishNight('rest')}break;
+ case 'advance':if(s.stage==='settled'||(week()&&s.chapter)){stopRhythm();s.day++;s.stage='day';s.tab='dream';s.explores=0;s.night=null;s.rescue=false;s.crafted=false;s.week={played:false,fc:false};s.accepted=null;s.proof=[];s.pick=null;invalidPay=false;say(week()?'今天是奖励日。玩一局节拍，或直接休息。':'新的一天。读一读来信，或者先去小店。')}break;
+ case 'upgrade':if(shopReady()&&s.day>=3&&!s.upgraded&&s.money>=25){s.money-=25;s.shelfCap+=2;s.upgraded=true;say('货架增加 2 格。')}break;
+ case 'hire':if(shopReady()&&s.day>=3&&!s.staff&&s.money>=65){s.money-=65;s.staff=true;say('店员到岗，每个营业日多一位甜点顾客。')}break;
+ case 'rhythm':if(s.chapter&&s.stage==='day'){rMode=k==='week'&&week()?'week':'boss';s.tab='rhythm';result='';}break;
+ case 'rhythmStart':if(s.tab==='rhythm'&&!run){result='';sound([60]);run={start:performance.now(),state:Array(chart.length).fill(''),sounded:Array(chart.length).fill(false),note:'等星光靠近判定线'};raf=requestAnimationFrame(step);}break;
+ case 'tap':tap();return;
+ case 'rhythmExit':stopRhythm();s.tab='dream';break;
+ }
+ render();
+}
+document.addEventListener('click',ev=>{
+ let el=ev.target.closest('button[data-a]');if(!el||el.disabled)return;
+ let a=el.dataset.a,k=el.dataset.k;
+ perform(a,k);
+ if(a==='tap')return;
+ let found=Array.from(document.querySelectorAll('button[data-a]')).find(b=>b.dataset.a===a&&b.dataset.k===k&&!b.disabled);
+ found?.focus({preventScroll:true});
+});
+document.addEventListener('keydown',e=>{if(e.code==='Space'&&s.tab==='rhythm'&&run){e.preventDefault();if(!e.repeat)tap()}});
+window.addEventListener('blur',()=>{if(run){stopRhythm();result='已暂停本轮。准备好后可以重新开始。';render()}});
+if(s.tab==='rhythm')s.tab='dream';
+render();
+</script>
+</body></html>

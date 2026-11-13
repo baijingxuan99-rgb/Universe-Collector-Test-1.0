@@ -1,0 +1,99 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>莫扎特系列 · 皮肤、回看墙与人物卡 · 宇宙收藏家</title><style>body{margin:0;background:#241a1b;color:#fbecd8;font:16px/1.7 system-ui,sans-serif}main{max-width:980px;margin:auto;padding:24px 18px 60px}nav{display:flex;gap:16px;flex-wrap:wrap}a{color:#ffda97}h1,h2,h3{color:#fff1db;line-height:1.3}h2{margin-top:1.8em;border-top:1px solid #7c675e;padding-top:.6em}blockquote{margin-left:0;border-left:3px solid #be9a64;padding:.2em 1em;background:#382728}.table-scroll{overflow:auto}table{border-collapse:collapse;width:100%;min-width:490px}th,td{border:1px solid #7c675e;padding:8px 11px;text-align:left;vertical-align:top}th{background:#553a2c}pre{overflow:auto;background:#151117;padding:10px}img{max-width:100%}</style></head><body><main><nav><a href="/#archive">项目档案</a><a href="/#play">工作台试玩</a><a href="/project/v13-collection.md" download>下载 Markdown</a></nav><h1>莫扎特系列 · 皮肤、回看墙与人物卡</h1>
+<p>状态为评审方案。V13 实装范围为经营界面文案。</p>
+<h2>三条独立奖励线</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>触发</th>
+<th>奖励</th>
+<th>界面反馈</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>三章必经探索及委托全部交付</td>
+<td>自动获得成年莫扎特主角皮肤，开启章节回看墙</td>
+<td>金框揭幕、皮肤立绘、明确「已获得」和「已开启」。可「试穿并前往回看墙」或「稍后查看」。奖励先入存档再显示，跳过演出照常到手</td>
+</tr>
+<tr>
+<td>三首正式合奏各达到三星</td>
+<td>一次性极高品质额外奖励，名称与用途待设计</td>
+<td>墙上点亮 9/9，打开独立的满星结算。占位稿仅标记奖励资格</td>
+</tr>
+<tr>
+<td>母亲、南内尔、莱奥波德三张紫色「罕见」卡齐全</td>
+<td>自动掉落莫扎特金色「稀有」卡</td>
+<td>卡册即时标记已收录；第三张紫卡与金卡连发，用一次结算分两拍展示</td>
+</tr>
+</tbody></table></div>
+<p>建议把「全部探索」写成三章的必经交付清单。皮肤与墙由探索进度触发，音游成绩、随机来访与卡册进度各自独立。三首曲为《小星星变奏曲》《D 大调小步舞曲》《土耳其进行曲》。墙上各留一个画框、最佳星级、重演按钮；首进墙可显示尚未演奏的空星。画框以图一的暗红墙纸和异形金框为参照，三首各使用自己的场景缩略图，名称与键盘焦点清楚显示。</p>
+<h2>星级判定提案</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>星级</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>☆☆☆</td>
+<td>尚未完成，或中途退出</td>
+</tr>
+<tr>
+<td>★☆☆</td>
+<td>合奏完成。带拍通关记 1 星，同时单列「带拍」</td>
+</tr>
+<tr>
+<td>★★☆</td>
+<td>手动完成，正式音符全命中，至少一个为 Great</td>
+</tr>
+<tr>
+<td>★★★</td>
+<td>手动完成，正式音符全部 Perfect</td>
+</tr>
+</tbody></table></div>
+<p>示范拍不计分；只有正式音符有 Perfect、Great、Miss。现有原型的有效窗为 ±180 ms，建议先测 ±65 ms Perfect，65–180 ms Great，另用 ±50、±80 ms 对照。建议加全局音画延迟校准与重试入口。有效时间窗内只对正确动作给判定，一拍只计一次；无匹配的按键给「空按」反馈，避免玩家误以为打中了音符。星级保存单次最高纪录，不拼接跨局表现。旧版存档没有逐拍精度证据，建议仅迁入可确认的完成纪录（1 星），原有演出落款另存。重演免费、无体力、同曲可立即重试。高品质奖励可以优先考虑纪念性用途，例如唯一的回看墙陈列物或额外演出画页；具体效果待定。</p>
+<h2>唯一人物卡</h2>
+<ul>
+<li><strong>母亲</strong>。第三章第一份必经委托由安娜·玛丽亚在旅途记忆中委托，成功后固定发她的一张紫卡。</li>
+<li><strong>姐姐与父亲</strong>。商店玩法开放后，从全游戏任意章节和任意营业模式的有效营业结算中各有小概率遇到。遇见即解锁对应紫卡，无需购买、交谈选对或带指定商品。角色来访走独立结算事件，和琴房之夜、来信客等可同夜排队出现。</li>
+<li><strong>莫扎特</strong>。三个唯一紫卡标记齐全时立即补发金卡，与皮肤分别记录。用全局唯一角色 ID 判重。刷新、重播弹窗、重复遇见、先收齐两个商店角色再做母亲委托，均只授予一次。</li>
+<li><strong>卡册与测试</strong>。落卡立即入卡册。三张来源明示，遇到后的选项用于读人物小传和回看。测试菜单提供「指定南内尔来访」「指定莱奥波德来访」，只用于隔离试玩档，不消耗正式遇见次数或写入正式收藏。</li>
+</ul>
+<h2>评审判断和可调参数</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>风险</th>
+<th>最小改动</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>高</td>
+<td>三条奖励条件混用，会让玩家以为刷满星才能换皮肤，或错过角色卡</td>
+<td>在皮肤弹窗、回看墙与卡册各显示自己那条目标</td>
+</tr>
+<tr>
+<td>高</td>
+<td>两张低概率卡会拖出长尾，即使卡不重复掉落</td>
+<td>每位建议 3%／合格营业夜，互斥抽取。保留原概率，已有项落空。第 30 个有效夜后，可从卡册约访仍缺的人物，每夜至多一位，正常开门后见面</td>
+</tr>
+<tr>
+<td>高</td>
+<td>现有计分只能证明命中，若直接标三星会稀释最高奖</td>
+<td>逐音符记录精度，用新谱回放获取三星，给延迟校准</td>
+</tr>
+<tr>
+<td>中</td>
+<td>连续连发奖励容易遮蔽可选下一步</td>
+<td>强反馈弹窗分层展示皮肤、回看墙，人物卡另走结算队列；先落盘再展示</td>
+</tr>
+</tbody></table></div>
+<p>自然出访测算按两个互斥事件各 3%、每夜独立。无约访时，两张都到手的概率在 10／20／30／60 夜约为 6.38%／20.25%／35.42%／70.28%，均值 50 夜。单人概率若降到 2%，均值为 75 夜；升到 4% 为 37.5 夜。建议保留 3% 和可选约访，在不主动约访的游玩路径中维持偶遇感。约访条件仍待确认。「有效营业夜」建议实际开门并完成至少一笔正常订单，同一天只记一次；刷新不重抽。无实测留存数据，30 夜仅是初始参数。首轮先测玩家能否说清三种奖励触发，随后测设备延迟、带拍完成与手动成绩区分。</p>
+<h2>可参考的游戏</h2>
+<ul>
+<li><a href="https://csassets.nintendo.com/noaext/image/private/t_KA_PDF/DS_Rythm_Heaven?_a=DATAg1AAZAA0">《Rhythm Heaven》任天堂说明书</a>用关卡窗显示成绩与奖章，并用奖章开启额外内容。这里可借鉴三幅画框各挂最佳成绩，额外奖励在墙上单独揭幕。</li>
+<li><a href="https://haneoka.org/intl/en/help/90002/">《BanG Dream!》游戏内帮助存档</a>分别定义 Full Combo 与 All Perfect。这里可借鉴让二星与三星直接对应两类判定，省去模糊的总分线。</li>
+<li><a href="https://animalcrossing.nintendo.com/new-horizons/explore/">《集合啦！动物森友会》博物馆介绍</a>把发现与长期展示连接起来。这里可借鉴卡册里看见来源、已收藏和缺位，使偶遇本身变成可回顾的纪念。</li>
+</ul>
+<h2>回看墙参考</h2><a href="/releases/v13/art/replay-wall-reference.png"><img loading="lazy" src="/releases/v13/art/replay-wall-reference.png" alt="三首合奏回看墙的画框构图参考"></a></main></body></html>

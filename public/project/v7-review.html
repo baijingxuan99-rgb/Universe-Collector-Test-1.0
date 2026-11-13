@@ -1,0 +1,136 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V7 参考稿整合评审 · 宇宙收藏家</title><style>body{margin:0;background:#241a1b;color:#fbecd8;font:16px/1.7 system-ui,sans-serif}main{max-width:980px;margin:auto;padding:24px 18px 60px}nav{display:flex;gap:16px;flex-wrap:wrap}a{color:#ffda97}h1,h2,h3{color:#fff1db;line-height:1.3}h2{margin-top:1.8em;border-top:1px solid #7c675e;padding-top:.6em}blockquote{margin-left:0;border-left:3px solid #be9a64;padding:.2em 1em;background:#382728}.table-scroll{overflow:auto}table{border-collapse:collapse;width:100%;min-width:490px}th,td{border:1px solid #7c675e;padding:8px 11px;text-align:left;vertical-align:top}th{background:#553a2c}pre{overflow:auto;background:#151117;padding:10px}img{max-width:100%}</style></head><body><main><nav><a href="/#archive">返回项目档案</a><a href="/#play">工作台试玩</a><a href="/project/v7-review.md">下载 Markdown</a></nav><h1>《宇宙收藏家》V7 画册版 · PPT 玩法融入评审</h1>
+<p><strong>结论｜有条件采用。</strong> 把《Music life》的画册、情景节奏和角色视角接入现有探索闭环。第一次游玩由归位直接过渡到合奏，完成后回到星光小店。选曲、角色视角和成绩放在收藏手记，供玩家主动重温。</p>
+<p>评审基线为上传的 <code>demo004(1).pptx</code> 与 V6 离线原型。PPT 的按钮、曲目难度和角色能力属于设计意图。V6 规则以实际代码为准。预测的理解度、兴趣和复玩意愿有待真人测试。</p>
+<h2>1. 玩法如何接进现有循环</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>PPT 提案与证据</th>
+<th>放进 MVP 的位置</th>
+<th>取舍和状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>第 4、15–16 页 · 用场景提示节奏</strong>。星光移动到掌心，灯弧摆回中间。音乐继续播放，玩家的动作提供独立反馈</td>
+<td>第一章拼好糖星、水星、猫星后，莉丝给出第一拍。示范两次，再用空格接星、Enter 摇灯。触屏使用同名按钮。</td>
+<td><strong>V7 已实现呈现。</strong> 街灯插画居中，动作和按键分列，五线谱进度放在下方。沿用 V6 的独立节拍音与命中反馈。PPT 摇灯切换旋律的玩法留待验证，当前摇灯是应拍动作。</td>
+</tr>
+<tr>
+<td><strong>第 5–6、8–10 页 · 标题、选曲、角色、结果</strong></td>
+<td>开场用名牌和家族画构成标题页。首次通关后，收藏手记出现「街灯接星」，可重奏、重听或翻阅家庭画页。</td>
+<td><strong>V7 已实现。</strong> 首次进度和收藏后的自由演奏走不同入口。单曲阶段跳过选择成本，未来有第二个可玩曲目时再增加曲目选择。</td>
+</tr>
+<tr>
+<td><strong>第 7、11–14 页 · 莫扎特一家、角色偏好与加分</strong></td>
+<td>初期用画卡和观察视角交代角色。下一章先试一次同场景的角色差异，例如姐姐用弦乐回应，莫扎特用键盘回应。</td>
+<td><strong>V7 复用莫扎特画卡。</strong> 角色选择和加分留作第二轮。先测同一事件能否因音色或提示产生可感知差异。音乐演出继续用原始命中率评估。</td>
+</tr>
+<tr>
+<td><strong>第 7 页 · 高、中、低音谱号区分难度，次数和连击决定完成度</strong></td>
+<td>有多张可区分的谱面后，再在收藏手记呈现难度。谱号旁写「入门／标准／挑战」，配上节拍数量和输入说明。</td>
+<td><strong>建议推迟。</strong> 第一章有亲手合奏和莉丝带拍，足够让轻度玩家过关。命中、连击和最佳成绩可服务主动复玩。</td>
+</tr>
+<tr>
+<td><strong>第 5 页 · 教程、校准、重玩</strong></td>
+<td>首演给动作示范，复演可从头重来；独立校准放进设置，等下一首曲目需要更严格判定时再测。</td>
+<td><strong>V7 支持明确暂停后从头重来。</strong> 继续当前时间点、延迟校准、长按判定和更多曲目属于后续实现。</td>
+</tr>
+<tr>
+<td><strong>第 17–18 页 · 琴房和《Alla turca》</strong></td>
+<td>琴房图用于通关后的家庭画页。未来若做琴房章节，可从图中选择人物动作作为声音线索，再接入同类的归位和合奏结算。</td>
+<td><strong>V7 已复用插图。</strong> 下一章先做一个独立小样，再决定是否增加长按、角色差异或新难度。</td>
+</tr>
+</tbody></table></div>
+<h3>优先解决的三处冲突</h3>
+<ol>
+<li><strong>选曲和选角色会截断第一次探索的因果。</strong> 莉丝已经把玩家带到窗边。此时多一步选择就会延后「我找回的旋律被唱出来」的反馈。把首次合奏留在街角，曲目与角色卡在通关后解锁。用无引导试玩验证玩家能否解释「合奏为什么在这里」。</li>
+<li><strong>图内提示要比装饰先被看见。</strong> 原画已有大量星芒，交互星必须有清晰的运动终点，路灯信号也要独立可辨。首轮保留掌心与灯弧轮廓和两个有文字的按钮。观察玩家看完两次示范后能否用对两种输入，尤其是静音和手机场景。</li>
+<li><strong>演出表现和夜间经营承担不同的压力。</strong> 命中应该影响演出反馈。晚间策略来自库存、周转金和客情。让成绩影响进货、概率或价格，会把节奏熟练度变成经营优势，较难判断玩家是否真的因客情而换门面。先让收藏回放和剧情视角承接复玩动机。</li>
+</ol>
+<h2>2. 平衡复核</h2>
+<p>验证范围为首章和前三个营业夜。按常规单售罄、无店员、无缺货惩罚测算。利润扣已售商品成本，存货占用另计。数值校验读取了 V6 的商品参数并核对 V7 的队列、开门规则、结算、命中和首次奖励逻辑。执行的临时校验脚本已清理。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>对照</th>
+<th>数值</th>
+<th>判定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>V6 与 V7 共同底盘</td>
+<td>三晚基础毛利分别为 <strong>6、9、9 币</strong>。首演与两封委托分别给 <strong>2、3、3 币</strong>。合计 <strong>32 币</strong>，来信客交易、橱窗和回收另计。</td>
+<td>玩法接入以此为对照。</td>
+</tr>
+<tr>
+<td>手动 0／6／12 命中，或莉丝带拍</td>
+<td>首次均解锁星星糖并获得 <strong>2 币</strong>。重奏、重听增量 <strong>0 币</strong>。</td>
+<td>通过。演出评价可独立展示。</td>
+</tr>
+<tr>
+<td>假设每次重奏给 2 币</td>
+<td><strong>5 次</strong>即可超过第三晚 9 币基础毛利，纯演出约 <strong>73 秒</strong>；20 次给 40 币。即使每次 1 币，9 次约 131 秒也能达到该毛利。</td>
+<td>作为可无限复玩的奖励会改变经济重心。优先用插图、演出落款与最佳成绩。</td>
+</tr>
+<tr>
+<td>假设首次过关要求 3 次完成</td>
+<td>现有短谱从约 <strong>14.6 秒</strong>变成约 <strong>43.8 秒</strong>，加约 29.2 秒纯谱面。还会增加中间的重开操作。</td>
+<td>次数适合记在手记里。</td>
+</tr>
+<tr>
+<td>假设首次解锁要求命中 8／12</td>
+<td>独立判定示例中，单拍命中率为 35%、60%、85% 时，过关率分别为 <strong>2.6%、43.8%、97.6%</strong>。命中率是假设，实际输入误差可能相关。</td>
+<td>同一阈值可能形成很大的通行差异。首章沿用统一解锁。</td>
+</tr>
+<tr>
+<td>主题橱窗原有风险</td>
+<td>陈列费 2 币，付费后留 6 币。到访 25%／50%／75% 对应相对普通营业期望增量 <strong>0／2／4 币</strong>；街坊拼单稳增 <strong>2 币</strong>。</td>
+<td>保留可解释的经营选择。插图收藏、演出表现和角色偏好与之分开。</td>
+</tr>
+</tbody></table></div>
+<h2>3. 画面与素材复用</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>实际素材</th>
+<th>V7 用途</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第 8 页家族合照 <code>image19.png</code></td>
+<td>标题页主画</td>
+<td>从 PPT 内嵌图片拆出，裁除透明留白，保留原画框和画面比例。标题、按钮和存档状态用可操作的 HTML 元素。</td>
+</tr>
+<tr>
+<td>第 11 页莫扎特画卡 <code>image27.png</code></td>
+<td>收藏手记的首张曲目卡</td>
+<td>保留画卡外形与原插画，文案、状态和按钮独立排版。</td>
+</tr>
+<tr>
+<td>第 15 页合奏样机 <code>image34.jpeg</code></td>
+<td>正式合奏的街灯画面</td>
+<td>裁取中部带框画面，保留画内掌心和路灯作为交互定位。左右英文键位、积分和原样机按钮留在裁区外。修复 V6 中损坏的嵌入式街灯图。</td>
+</tr>
+<tr>
+<td>第 18 页琴房原图 <code>image39.jpeg</code></td>
+<td>家庭画页弹窗</td>
+<td>按实际图像透明通道保留边缘，独立显示中文说明。画页属于收藏内容。</td>
+</tr>
+<tr>
+<td>第 3 页外部作品图、第 9–14 页整张 UI 截图</td>
+<td>视觉参考</td>
+<td>参考暗酒红底、奶油金文字、木画框和谱线分隔。实际 UI 由 CSS 和可交互控件绘制。</td>
+</tr>
+</tbody></table></div>
+<p>街角仍沿用可交互 SVG 场景，热点位置与 V6 一致。探索场景采用冷蓝夜色和暖金物件，经营与手记采用暖棕画册纸面。金色实心用于主要动作，边框用于次要操作，完成、选中与缺货同时保留文字或图标。窄屏下画面在上，两个动作并排在下，减少演奏中滚动的需要。素材压缩后内嵌于 HTML，整包可离线打开。</p>
+<h2>4. 最小验证</h2>
+<p>选 5 位目标玩家作为第一轮可用性试验，记录实际耗时和动作顺序。</p>
+<ul>
+<li><strong>首次进梦境。</strong> 目标为 5 分钟内从异常线索走到第一次合奏或带拍结算；至少 4 人能说清三段旋律如何进入下一步。</li>
+<li><strong>合奏。</strong> 至少 4 人看完示范后能独立尝试正确的两种动作。记下第一次错按发生在看不见、看不懂还是来不及。记录主动带拍和手动选择，避免把通关率等同于喜欢。</li>
+<li><strong>收藏回看。</strong> 通关后能找到曲目、说明重奏与重听的差别，并独立返回原流程。若画册被误认成另一条必做主线，先调整入口或文案。</li>
+<li><strong>第三晚。</strong> 在库存和现金相同的情况下展示冷清与热闹客情，观察玩家是否改变门面和备货，并能说出可能亏掉的 2 币。这里验证经营选择有没有被新增的音乐内容掩盖。</li>
+</ul>
+<p>本轮覆盖探索、叙事、界面、经济和素材复用。节拍延迟的设备差异、控制器、完整歌曲制作、角色平衡、多人和发行范围留待各自验证。</p>
+</main></body></html>

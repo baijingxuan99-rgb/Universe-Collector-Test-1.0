@@ -1,3 +1,12 @@
+# 宇宙收藏家 · 迭代原型与工作台
+
+- [版本索引与试玩笔记](public/workbench.html)
+- [现有互动工作台](https://cosmic-collector-workbench.popular-tremors-2r46.chatgpt.site/)
+- [今晚来过的人](public/index.html) · [把琴声挪一拍](public/sound-shop.html)
+- [PC 与 Windows 原型](public/releases) · [玩法文档和数据](public/project)
+
+解压或克隆后，打开 `public/workbench.html` 可搜索和试玩。Netlify 的发布目录是 `public`。
+
 # 宇宙收藏家 · 玩法大迭代 V1
 
 打开 public/index.html 可开始两晚 A/B 试玩。每组从 12 币、6 格货架和空库存开始。试玩记录可在页内导出为 JSON。

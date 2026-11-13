@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>玩法大迭代 V1 · 宇宙收藏家</title>
+<style>
+:root{color-scheme:dark}body{background:#171721;color:#f1ecf2;font:16px/1.75 system-ui,sans-serif;margin:0}main{max-width:940px;margin:auto;padding:36px 22px 70px}h1{font-size:clamp(30px,5vw,52px);line-height:1.15}h2{margin-top:35px;font-size:24px}a{color:#ffce91}p,li{max-width:78ch}.eyebrow{color:#dcc39c}table{border-collapse:collapse;width:100%;min-width:620px}td,th{text-align:left;padding:10px;border-bottom:1px solid #555165}.scroll{overflow:auto}aside{padding:18px 22px;background:#242236;border:1px solid #555165;border-radius:12px}
+</style>
+<main>
+<p><a href="/">返回原型工作台</a></p>
+<p class="eyebrow">2026-11-11 · V17 基线 · V1 试验待人工验证</p>
+<h1>玩法大迭代 V1</h1>
+<p>家庭排练已形成观察、假设、试奏和修正的过程。商店有自己的备货与交付循环，但经营结果很少改变次日的探索决策。本轮先验证一笔顾客需求能否把两边接起来。</p>
+<aside><strong>建议验证的循环</strong><p>打烊获知街坊需求 → 决定是否出门调查 → 解锁配方 → 给订单留货位 → 交付并选择是否继续下一单。</p><p><a href="/loop-lab/">进入探索与经营对照试玩</a> · <a href="loop-iteration-v1.csv" download>下载四条 V17 路线 CSV</a></p></aside>
+<h2>V17 当前循环</h2>
+<ul>
+<li>探索中观察或试听，提出解释，排列、试奏或提交，根据反馈修正。第三章能通过重演直接听出调整前后的差异。</li>
+<li>经营中看订单、采购摆货、收银和结算。探索可解锁纸星、月亮糖及主题营业。普通营业会接入舞步谱卡，纸星和月亮糖主要依赖主题模式。</li>
+<li>节奏表现影响星级与大师奖励。主线推进和莫扎特收藏可在全漏的路线完成，最终谱面固定。</li>
+</ul>
+<h2>整段通关测试</h2>
+<p>从新档运行 V17 原型动作与结算逻辑。市场种子 42，普通营业采用推荐采购和一键上架。日程为 D1 梦境、D2 纸星、D3 月牙、D4／5／8 巴黎琴房、D8／9／10 家庭排练与终章。数据截止终场演出结算。</p>
+<div class="scroll"><table><thead><tr><th>路线</th><th>营业夜数</th><th>通关日</th><th>期末现金</th><th>商品</th><th>三首星级</th><th>大师资格</th></tr></thead><tbody>
+<tr><td>正常开店 · 全中</td><td>7</td><td>10</td><td>107</td><td>5</td><td>3／3／3</td><td>有</td></tr>
+<tr><td>正常开店 · 全漏</td><td>7</td><td>10</td><td>107</td><td>5</td><td>1／1／1</td><td>无</td></tr>
+<tr><td>全程休息 · 全中</td><td>0</td><td>10</td><td>58</td><td>5</td><td>3／3／3</td><td>有</td></tr>
+<tr><td>全程休息 · 全漏</td><td>0</td><td>10</td><td>58</td><td>5</td><td>1／1／1</td><td>无</td></tr>
+</tbody></table></div>
+<p>四条路线都解锁莫扎特收藏。常规路线 7 晚均无缺单。钢琴错放会提示并可修正。家庭排练提前进拍时，第 3 格显示余响和琴声冲突，并拒绝交付。终章需在两个位置完成试听。</p>
+<h2>探索与经营交叉测试</h2>
+<div class="scroll"><table><thead><tr><th>情景</th><th>观察结果</th></tr></thead><tbody>
+<tr><td>月牙委托做到一半后赶工</td><td>雇佣时保留形状线索。确认赶工后线索清空，第 4 天重新接单时需重查。</td></tr>
+<tr><td>先完成月牙委托再雇佣</td><td>获得 3 币、4 格仓储与月亮糖资格。用奖励买的月亮糖在当晚普通营业中未售。</td></tr>
+<tr><td>月夜招牌，冷清客情</td><td>种子 42 和 46 分别复现主题客缺席和到场，到访率均为 15%。备货 4 件、陈列费 4 币。到访时额外营业额 30 币。</td></tr>
+<tr><td>首夜营业或休息</td><td>营业会见到玛德琳，休息会跳过会面。两路都在第 2 天开放纸星委托。</td></tr>
+<tr><td>雇佣后零现金、零库存</td><td>旧赶工首夜卖出 10 件得 20 币。工作台临时摊试算每晚成交 3 件时首夜得 6 币，标准与稀疏客流均在第 5 天打烊后可备足 10 件，无常规客流延至第 8 天打烊。</td></tr>
+</tbody></table></div>
+<h2>人工试玩如何判断</h2>
+<ol><li>分配 A→B 和 B→A 两种顺序，让第一次接触游戏的人自行决定出门或直接备货。</li><li>记录首晚是否出门、出门后的备货组合、是否兑现订单、打烊后是否主动查看第二封来信。最后问玩家「刚才是谁让你改变了备货？」</li><li>如果 B 提高首晚探索却没有带来后续备货变化或第二单意愿，回查谜题本身、预留货位的代价与交付反馈。</li></ol>
+<p>当前数据来自脚本走查和工作台试算。真实音画手感、提示可发现性、继续游玩的意愿待人工验证。对照页采用两个营业日、6 格货架和 12 币的独立参数。B 同时改变了预约信息和到访确定性，后续可单独验证哪个因素影响决策。</p>
+</main></html>

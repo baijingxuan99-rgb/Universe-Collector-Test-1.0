@@ -1,0 +1,191 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V8 数值总表 · 宇宙收藏家</title><style>body{margin:0;background:#241a1b;color:#fbecd8;font:16px/1.7 system-ui,sans-serif}main{max-width:980px;margin:auto;padding:24px 18px 60px}nav{display:flex;gap:16px;flex-wrap:wrap}a{color:#ffda97}h1,h2,h3{color:#fff1db;line-height:1.3}h2{margin-top:1.8em;border-top:1px solid #7c675e;padding-top:.6em}blockquote{margin-left:0;border-left:3px solid #be9a64;padding:.2em 1em;background:#382728}.table-scroll{overflow:auto}table{border-collapse:collapse;width:100%;min-width:490px}th,td{border:1px solid #7c675e;padding:8px 11px;text-align:left;vertical-align:top}th{background:#553a2c}pre{overflow:auto;background:#151117;padding:10px}img{max-width:100%}</style></head><body><main><nav><a href="/#archive">返回项目档案</a><a href="/#play">工作台试玩</a><a href="/project/economy.md">下载 Markdown</a></nav><h1>数值总表 · V8 实际试玩</h1>
+<blockquote>
+<p>单位为宇宙币、件和格。以 V8 离线原型代码为准。工作台的可编辑沙盘是按人均购买一件估算的独立试算，本页按原型的多件订单记录。 <a href="/project/Cosmic_Collector_V8_Economy.xlsx">下载 Excel 数值表</a></p>
+</blockquote>
+<h2>商品和许可</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>商品</th>
+<th align="right">进价</th>
+<th align="right">售价</th>
+<th align="right">单件毛利</th>
+<th>上架资格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>星星糖</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td>第一章归位并完成窗边合奏或带拍</td>
+</tr>
+<tr>
+<td>纸星星</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td>完成「给窗台留一颗星」</td>
+</tr>
+<tr>
+<td>月亮糖</td>
+<td align="right">3</td>
+<td align="right">5</td>
+<td align="right">2</td>
+<td>完成「月牙形的小甜点」</td>
+</tr>
+<tr>
+<td>手作纸星</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td>手作、纸边回收或现金短缺时赶工；无需常规进货</td>
+</tr>
+</tbody></table></div>
+<h2>时间与容量</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>数值</th>
+<th>生效条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>初始现金</td>
+<td>50</td>
+<td>新存档。完成首演另加 2</td>
+</tr>
+<tr>
+<td>初始仓库</td>
+<td>16 件</td>
+<td>仓库与货架分开计数</td>
+</tr>
+<tr>
+<td>仓储扩容</td>
+<td>+4 件 / 0 币</td>
+<td>月牙甜点首次交付</td>
+</tr>
+<tr>
+<td>初始货架 / 开门</td>
+<td>10 格 / 至少 10 件</td>
+<td>货架与现金需满足所选营业模式</td>
+</tr>
+<tr>
+<td>货架升级</td>
+<td>25 币 / +2 格</td>
+<td>第 3 天起，买一次，开门门槛仍为 10</td>
+</tr>
+<tr>
+<td>雇佣</td>
+<td>65 币 / +1 位星星糖客</td>
+<td>第 3 天起；首夜教学队列例外</td>
+</tr>
+<tr>
+<td>白天探索</td>
+<td>2 次</td>
+<td>首演结算已记 1 次；工作坊普通手作会占 1 次</td>
+</tr>
+<tr>
+<td>周期</td>
+<td>5 个经营日 + 2 个休息日</td>
+<td>第 6、7 天跳过营业。巴黎三日最早第 4、5、8 天</td>
+</tr>
+<tr>
+<td>常规缺货</td>
+<td>下一营业日 −1 位常规顾客</td>
+<td>每晚存在至少一笔常规缺货时生效；保底至少 2 位；额外订单缺货不触发</td>
+</tr>
+<tr>
+<td>找零钱盒</td>
+<td>1 币 ×2、2 币 ×2、5 币 ×1</td>
+<td>每晚重置；首夜首单、后续夜前两笔非额外单可手动找零，支持换零和快捷结账</td>
+</tr>
+</tbody></table></div>
+<h2>基础订单与毛利</h2>
+<p>假设全部成交、无雇佣、无客流惩罚、不含顾客额外购买。采购和售出的时间可以不同。表中货品成本按已售数量计。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>日期</th>
+<th align="right">星星糖</th>
+<th align="right">纸星星</th>
+<th align="right">月亮糖</th>
+<th align="right">营业额</th>
+<th align="right">已售成本</th>
+<th align="right">毛利</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>首夜</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">18</td>
+<td align="right">12</td>
+<td align="right">6</td>
+</tr>
+<tr>
+<td>后续偶数经营日</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">21</td>
+<td align="right">12</td>
+<td align="right">9</td>
+</tr>
+<tr>
+<td>后续奇数经营日</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">23</td>
+<td align="right">14</td>
+<td align="right">9</td>
+</tr>
+</tbody></table></div>
+<p>后续日订单由种子拆分为 3–4 位顾客。总数量相同，发生缺货惩罚时会裁减队尾订单，减少的件数取决于被裁掉的订单。第 1、2 夜分别有玛德琳和埃米尔来访，打烊后可听委托，库存允许时各加卖 1 颗星星糖。</p>
+<h2>营业模式</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>额外备货</th>
+<th>费用 / 周转</th>
+<th>相对普通营业</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>普通</td>
+<td>无</td>
+<td>0 / 无额外要求</td>
+<td>0</td>
+</tr>
+<tr>
+<td>街坊拼单</td>
+<td>星星糖 2</td>
+<td>0</td>
+<td>成交毛利 +2</td>
+</tr>
+<tr>
+<td>灯夜橱窗</td>
+<td>纸星星或月亮糖 3</td>
+<td>开门付 2 币，付费后至少保留 6 币。常规单须备齐</td>
+<td>来客再收 2 币订制费，成交 +6，未到访 −2</td>
+</tr>
+</tbody></table></div>
+<p>灯夜客情为冷清、寻常、热闹，对应到访率 25%、50%、75%。相对普通营业的期望净增分别为 0、2、4 币。概率展示按当日种子，刷新不会更换客情。</p>
+<ul>
+<li>营业毛利 = 营业额 − 已售商品成本 − 陈列费。</li>
+<li>现金结余 = 期初现金 − 本日实际支付采购 − 已支付升级与陈列 − 雇佣支出 + 本日销售收入 + 已领取现金奖励。</li>
+<li>采购会先占用现金。账面有利润时仍可能缺少现金或空货架。Excel 中的营业情景只比较模式增量，不模拟跨夜补货。</li>
+</ul>
+<h2>手作与奖励</h2>
+<ul>
+<li>普通手作得到 2 件手作纸星，同一天限一次，消耗 1 次探索。</li>
+<li>每晚首笔售出纸星星的订单可留下 1 片干净纸边，余料上限 4 片。2 片回收出 1 件手作纸星，每天一次。</li>
+<li>当持有货品与现款不足以凑齐 10 件时，可赶工补足到开门线。赶工会占用当天剩余探索，赶工货优先接待。</li>
+<li>首演：2 币、星星糖许可；复听不再发钱。纸星、月牙各 3 币。黄铜扣账簿是月牙委托的一次性工具奖励。</li>
+<li>巴黎三日均为 0 币、0 新商品许可，依次给巴黎谱页、三拍指针、合奏画页。终章数值随节奏关另行定稿。</li>
+</ul>
+</main></body></html>

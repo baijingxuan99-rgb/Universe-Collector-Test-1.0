@@ -1,0 +1,5 @@
+build,seed,route,opened_nights,final_day,cash,product_count,stars,minuet,turca,mozart_collection,master_eligible
+V17,42,ordinary_perfect,7,10,107,5,3,3,3,true,true
+V17,42,ordinary_missed,7,10,107,5,1,1,1,true,false
+V17,42,rest_perfect,0,10,58,5,3,3,3,true,true
+V17,42,rest_missed,0,10,58,5,1,1,1,true,false

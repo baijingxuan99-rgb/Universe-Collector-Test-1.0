@@ -1,0 +1,73 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>制作策划总览 · 宇宙收藏家</title><style>body{margin:0;background:#241a1b;color:#fbecd8;font:16px/1.7 system-ui,sans-serif}main{max-width:980px;margin:auto;padding:24px 18px 60px}nav{display:flex;gap:16px;flex-wrap:wrap}a{color:#ffda97}h1,h2,h3{color:#fff1db;line-height:1.3}h2{margin-top:1.8em;border-top:1px solid #7c675e;padding-top:.6em}blockquote{margin-left:0;border-left:3px solid #be9a64;padding:.2em 1em;background:#382728}.table-scroll{overflow:auto}table{border-collapse:collapse;width:100%;min-width:490px}th,td{border:1px solid #7c675e;padding:8px 11px;text-align:left;vertical-align:top}th{background:#553a2c}pre{overflow:auto;background:#151117;padding:10px}img{max-width:100%}</style></head><body><main><nav><a href="/#archive">返回项目档案</a><a href="/#play">工作台试玩</a><a href="/project/production.md">下载 Markdown</a></nav><h1>制作策划总览 · V8</h1>
+<h2>产品目标</h2>
+<p>《宇宙收藏家》是一款环境解谜与小店经营交替推进的轻度游戏。玩家在历史人物的记忆或想象中发现异常，收集可听、可看、可交互的线索，完成一次由自己促成的作品呈现。探索所得可以是商品许可、收藏、工具或少量货币。小店回收探索产出，用客流、备货、周转与找零形成自己的决策。</p>
+<p>目标玩家为青少年和轻度解谜成人。首章约 5 分钟帮助玩家理解操作，正式章约 8 分钟探索，夜间经营单独计时。目标时长是设计指标。</p>
+<h2>主循环与状态</h2>
+<ol>
+<li>白天由场景或来信给出任务。移动到附近才出现观察，点击物件会自动走近。</li>
+<li>从物件状态得到线索，按配对、比对、排序或交付完成任务。正式解谜保留已读线索，允许看提示和局部重试。</li>
+<li>主线通过场景变化或作品呈现结算。第一章接星与摇灯，既可手动也可带拍。委托的收藏、工具和商品许可分开。</li>
+<li>晚间一键采购或单品补货，一键上架、撤架。选择普通、拼单或橱窗。开门后先做队列，再做打烊结算与熟客来访。</li>
+<li>下一工作日重新分配探索次数。休息日可读来信，离线游戏进度保存在当前浏览器。工作台沙盘独立于游戏存档。</li>
+</ol>
+<h2>制作口径</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>当前基线</th>
+<th>未来任务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>交互</td>
+<td>2.5D 固定镜头，街角与巴黎琴房可走动，光区提示，鼠标触屏及键盘并行</td>
+<td>继续测窄屏、点击识别和路径引导</td>
+</tr>
+<tr>
+<td>场景与角色</td>
+<td>暖木、奶油金与冷夜色的画册式表现。场景内热点、角色和商品 UI 单独叠加</td>
+<td>Unity 立项时再验证无描边 Low Poly、第三人称镜头和白雾梦境边界</td>
+</tr>
+<tr>
+<td>开场</td>
+<td>星星糖、水面倒影、猫纹三条线索，归位后在窗边合奏</td>
+<td>实测首次完成时长、点按可读性</td>
+</tr>
+<tr>
+<td>第二章</td>
+<td>巴黎琴房三日委托，KV 7,02 暂作底本，作品背景与虚构对白分离</td>
+<td>原谱录制、把部分题目由选择改为直接摆放操作</td>
+</tr>
+<tr>
+<td>第三章</td>
+<td>Alla turca，K.331 第三乐章，辨动机、排重音、分段节奏终场</td>
+<td>曲目音频、谱面、判定、关卡与结算均待制作</td>
+</tr>
+<tr>
+<td>经营</td>
+<td>十格货架、预约订单、找零、客情与两种附加营业模式</td>
+<td>实测选择分布、低现金连续日和升级节奏</td>
+</tr>
+<tr>
+<td>支线</td>
+<td>纸星、月牙和巴黎工具／收藏奖励。印坊、合成等存为早期备选</td>
+<td>以新的玩法决策纳入制作，控制资源量</td>
+</tr>
+</tbody></table></div>
+<h2>解谜设计约束</h2>
+<ul>
+<li>第一条线索帮助理解物件，第二条线索能排除最合理的错误答案。先演示交互，再用同一语法增加新约束。</li>
+<li>点击发现后有物件变化、手记或听觉回应。碰错只提示结果，不扣钱、不清除证据。</li>
+<li>音乐内容同时有视觉替代线索。游戏内史实使用可追溯作品来源，场景对白和日程明确属于演绎。</li>
+<li>同一地图由状态变化承担回访，不为每个委托复制一套玩法与场景。故事对白脚本与交互状态要同时评审。</li>
+</ul>
+<h2>关键验收</h2>
+<ul>
+<li>新玩家能说明三颗星为什么在这些地方，归位后能感知旋律变化。</li>
+<li>在浏览器里点击「工作台试玩」能看到游戏标题，点击「开始游戏」后进入场景；在独立离线包中可完成相同步骤。</li>
+<li>白天、采购、营业、打烊、来信和下个工作日能闭环；主题橱窗按实际条件解锁。</li>
+<li>完成月牙后解锁琴房，错答保留线索。三日委托按序交付，各自只发一次奖励。</li>
+<li>版本更新同时登记程序、策划、文案、数值、音乐出处和美术状态。沙盘修改由使用者在原工作台独立保留。</li>
+</ul>
+</main></body></html>

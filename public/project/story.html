@@ -1,0 +1,123 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>剧情与交互文案脚本 · 宇宙收藏家</title><style>body{margin:0;background:#241a1b;color:#fbecd8;font:16px/1.7 system-ui,sans-serif}main{max-width:980px;margin:auto;padding:24px 18px 60px}nav{display:flex;gap:16px;flex-wrap:wrap}a{color:#ffda97}h1,h2,h3{color:#fff1db;line-height:1.3}h2{margin-top:1.8em;border-top:1px solid #7c675e;padding-top:.6em}blockquote{margin-left:0;border-left:3px solid #be9a64;padding:.2em 1em;background:#382728}.table-scroll{overflow:auto}table{border-collapse:collapse;width:100%;min-width:490px}th,td{border:1px solid #7c675e;padding:8px 11px;text-align:left;vertical-align:top}th{background:#553a2c}pre{overflow:auto;background:#151117;padding:10px}img{max-width:100%}</style></head><body><main><nav><a href="/#archive">返回项目档案</a><a href="/#play">工作台试玩</a><a href="/project/story.md">下载 Markdown</a></nav><h1>剧情与交互文案脚本 · 音乐宇宙</h1>
+<p>状态说明：第一章、街角两封信、巴黎三日为 V8 已实现内容的演出整理。表中的舞台指示便于继续制作。第三章为待制脚本草案。</p>
+<h2>人物与语言</h2>
+<ul>
+<li>小莫扎特 / 收藏家：借梦观察、试听和归位。用可见动作回应，少替玩家解释。</li>
+<li>莉丝：在杂货店前等妈妈收工。线索藏在她熟悉的街角。句子短，有生活细节。</li>
+<li>玛德琳、埃米尔：熟客来信由实际物件和用途发起。收信、达成、交付分别给反馈。</li>
+<li>巴黎琴房：围绕家用谱本、键盘与小提琴的关系写短对白。1763 年巴黎与谱本出处有作品目录依据；来信、缺角与三日顺序为戏剧化设计。</li>
+</ul>
+<h2>第一章 · 梦中拾星</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>场次</th>
+<th>触发与演出</th>
+<th>台词／提示</th>
+<th>状态变化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.1 杂货店外</td>
+<td>第一次进入场景；莉丝在窗边，糖纸有轻响</td>
+<td>系统「莉丝哼着半段童谣。去窗下听一听。」莉丝「嘘，妈妈还在收箱子。我刚才哼到这里，后面几拍就跑掉了。你听，糖纸也在响。」</td>
+<td>展开糖纸，记录糖星。</td>
+</tr>
+<tr>
+<td>1.2 倒影</td>
+<td>收下糖纸后可再问莉丝，靠近池边</td>
+<td>莉丝「池里那颗倒着站的星星，会不会也记得一拍？」池边可观察湿绳、空钩和波纹。</td>
+<td>把绳挂起，水面静下来，记录水星。误碰只加深波纹。</td>
+</tr>
+<tr>
+<td>1.3 猫纹</td>
+<td>靠近黑白猫；先观察它躲人的反应</td>
+<td>可把软垫放进篮子，等猫坐好。</td>
+<td>猫转身露出星纹，记录猫星。</td>
+</tr>
+<tr>
+<td>1.4 钢琴</td>
+<td>三星齐集，钢琴亮起</td>
+<td>起句空白→圆，转句圆→菱形，收句菱形→空白。先试听再放。</td>
+<td>糖、水、猫归位。错放留原位，可撤回最后一段。</td>
+</tr>
+<tr>
+<td>1.5 窗边合奏</td>
+<td>归位后选择手动或莉丝带拍</td>
+<td>看星到手心时接星；灯弧回到中间时摇灯。</td>
+<td>首次结算开放星星糖，发 2 币。成绩独立记录，复听不重复发放。</td>
+</tr>
+</tbody></table></div>
+<h2>回访 · 两封街角来信</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>节点</th>
+<th>来信与场景动作</th>
+<th>交付反馈</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第 2 日起 · 给窗台留一颗星</td>
+<td>玛德琳「莉丝想在窄窗里挂一颗星。风大时还得折起来收好。窗边的木框能试大小，你明早去看看？」用木框验宽、折纸台验折痕，也可以问莉丝看试装记录。</td>
+<td>叶纹样品同时合适。莉丝把纸星星挂上窄窗。开放纸星星采购、发 3 币。</td>
+</tr>
+<tr>
+<td>第 3 日起 · 月牙形的小甜点</td>
+<td>埃米尔「我答应给孩子带一弯能吃的月亮。灯下有几样东西都像月牙，帮我看清哪个是包在糖纸里的。」比较灯下轮廓和食用糖纸；猫篮或门边均能验证糖纸。</td>
+<td>交付花纹封蜡包裹。埃米尔收好糖纸，交出黄铜扣账簿。开放月亮糖、仓库加 4 格、发 3 币。</td>
+</tr>
+</tbody></table></div>
+<h2>第二章 · 巴黎琴房三日</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>场次</th>
+<th>来信与交互</th>
+<th>成功／错误反馈</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2.1 抄谱的缺角</td>
+<td>「缺角盖住了调号。要抄给南内尔，先把这页认清。」抄谱桌有两个升号，键盘试音收束到 D，谱架给候选。</td>
+<td>正确「两枚升号终于写回纸上。南内尔把谱页夹进了手记。」得巴黎谱页。错答时提示对照两个升号和收束键。</td>
+</tr>
+<tr>
+<td>2.2 给第二把椅子留位置</td>
+<td>「谱本里只有键盘页。排练时，谁坐在旁边？」家用谱本只有键盘行，合奏页有两行，空椅旁有小提琴盒。</td>
+<td>正确「两把椅子都有了主人。」得三拍指针。错答时请玩家回看乐器盒。</td>
+</tr>
+<tr>
+<td>2.3 让舞步跟上琴声</td>
+<td>「每组脚印都从重的一步开始。你来给我们摆好第一组。」谱页是三拍，键盘第一拍亮，可以打开指针。</td>
+<td>强、弱、弱。「第一拍落在该落的位置。窗边的两把椅子相对，排练终于从头走了一遍。」得合奏画页。</td>
+</tr>
+</tbody></table></div>
+<p>可用口径：只对当前任务说话，错答不清记录。任务交付后下一探索日才接下一封信，工作台内可查正式任务与谜底。</p>
+<h2>第三章 · 终场草案</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>场次</th>
+<th>目的与拟用台词</th>
+<th>玩家动作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3.1 辨认开场</td>
+<td>「灯已经亮了。先把领路的那一句听回来。」</td>
+<td>比较短音顺序与收束方向，辨认 Alla turca 开场动机。</td>
+</tr>
+<tr>
+<td>3.2 排重音</td>
+<td>「等地板响第一下，再把脚落下去。」</td>
+<td>对照听觉与视觉提示，尝试重音位置。</td>
+</tr>
+<tr>
+<td>3.3 终场合拍</td>
+<td>「这一回，从你给的第一拍开始。」</td>
+<td>多段场景节奏输入，可单段重试。收尾展示装扮或画页，成绩独立保存。</td>
+</tr>
+</tbody></table></div>
+<p>第三章对白等待曲谱、判定与场景设计定稿。第二章现有音频为原型试听和节拍示意，完整演奏将另行制作。</p>
+</main></body></html>
