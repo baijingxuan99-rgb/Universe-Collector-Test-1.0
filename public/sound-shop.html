@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>星光小店 · 把琴声挪一拍</title>
+<style>
+[hidden]{display:none!important}:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#171822;color:#f5efea;font:16px/1.55 system-ui,sans-serif}main{width:min(680px,calc(100% - 32px));margin:7vh auto}h1{font-size:clamp(28px,6vw,42px);line-height:1.15;margin:8px 0 20px}p{margin:10px 0}.card{background:#242534;border:1px solid #47495c;border-radius:16px;padding:20px}.muted{color:#c9c6d2}.accent{color:#ffcf89}.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}button,select{font:inherit;color:inherit;background:#33364a;border:1px solid #74788e;border-radius:8px;min-height:44px;padding:6px 11px}button{cursor:pointer}button.primary{background:#ffcf89;color:#231b13;border-color:#ffcf89;font-weight:700}button:focus-visible,select:focus-visible{outline:3px solid white;outline-offset:3px}label{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}.beats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:16px 0}.beat{background:#343747;min-height:72px;padding:6px;text-align:center;border-radius:8px;font-size:14px}.beat small{display:block;color:#cbc8d5}.beat[data-active]{outline:2px solid #ffcf89}.beat.conflict{background:#683f45}#result{min-height:52px;margin-top:14px}details{margin-top:16px}summary{cursor:pointer}
+</style>
+<main>
+<div class="accent">宇宙收藏家 · 玩法试验</div>
+<h1>把琴声挪一拍</h1>
+<section class="card">
+<h2 id="scene" tabindex="-1"></h2><p id="brief" class="muted"></p>
+<div id="beats" class="beats" aria-label="四拍时间轴"></div>
+<div class="row" id="controls">
+<label>琴声进场 <select id="entry" aria-label="琴声进场"><option value="1">第 1 拍</option><option value="2">第 2 拍</option><option value="3">第 3 拍</option></select></label>
+<label id="lengthLabel">乐句 <select id="length" aria-label="乐句长度"><option value="1">短句 · 1 拍</option><option value="2">完整句 · 2 拍</option></select></label>
+<label id="introLabel"><input type="checkbox" id="intro">第 1 拍另加迎客短句</label>
+</div>
+<div class="row" id="presets" hidden><label>营业方案 <select id="preset"><option value="0">迎客短句</option><option value="1">窗边完整句</option><option value="2">两段都演 · 布置费 1 币</option></select></label></div>
+<div class="row"><button id="listen">试听</button><button class="primary" id="submit"></button><button id="next" hidden>去第二晚</button></div>
+<p id="result" role="status"></p>
+</section>
+<details><summary>试玩结束后记录感受</summary><p>哪一次改动让你听出了差别？第二晚你预判对了吗？已经让两位顾客满意之后，你还想试哪种排法？</p><div class="row"><button id="export">导出操作记录</button><button id="reset">从第一晚重来</button></div></details>
+</main>
+<script>
+'use strict';
+const rooms=[
+ {title:'第一晚 · 家庭排练',brief:'门铃在第 1 拍响起，余音拖到第 2 拍。试着让两拍琴声都听得清。',noise:[1,2],name:'门铃'},
+ {title:'第二晚 · 小店营业',brief:'柜台在第 2 拍找零。赶路客听完第 1 拍就走，窗边客要听见连续两拍。基础收入 3 币。另加迎客短句需要 1 币布置费。',noise:[2],name:'找零声'}
+];
+function evaluate(night,entry,length,intro=false){
+ const notes=Array.from({length},(_,i)=>entry+i);
+ const clear=notes.filter(i=>!rooms[night].noise.includes(i));
+ return {notes,clear,quick:clear.includes(1)||(intro&&!rooms[night].noise.includes(1)),seated:length===2&&clear.length===2};
+}
+const el=id=>document.getElementById(id);
+const mode=new URLSearchParams(location.search).get('mode')==='preset'?'preset':'manual';
+const presets=[
+ {entry:1,length:1,intro:false},
+ {entry:3,length:2,intro:false},
+ {entry:3,length:2,intro:true}
+];
+let night=0, solved=false, sales=0, events=[], audio, voices=[], timers=[];
+const config=()=>night===1&&mode==='preset'?presets[Number(el('preset').value)]:({entry:Number(el('entry').value),length:night===0?2:Number(el('length').value),intro:night===1&&el('intro').checked});
+function log(action,extra={}){events.push({mode,night:night+1,action,...config(),...extra});}
+function stop(){
+ for(const timer of timers)clearTimeout(timer);
+ for(const voice of voices){try{voice.stop();}catch{}}
+ timers=[];voices=[];
+}
+function draw(active){
+ const room=rooms[night], {entry,length}=config();
+ const {notes}=evaluate(night,entry,length);
+ el('beats').innerHTML=[1,2,3,4].map(i=>{
+  const noise=room.noise.includes(i), piano=notes.includes(i), intro=config().intro&&i===1;
+  return '<div class="beat'+(noise&&piano?' conflict':'')+'"'+(active===i?' data-active':'')+'><small>第 '+i+' 拍</small>'+[noise?room.name:'',piano?'琴声':'',intro?'迎客短句':''].filter(Boolean).join('＋')+'</div>';
+ }).join('');
+}
+function scene(){
+ el('scene').textContent=rooms[night].title;el('brief').textContent=rooms[night].brief;
+ const choosePreset=night===1&&mode==='preset';
+ el('controls').hidden=choosePreset;el('presets').hidden=!choosePreset;
+ el('lengthLabel').hidden=night===0;
+ el('introLabel').hidden=night===0;
+ el('submit').textContent=night===0?'确认排练':'开门试营业';
+ el('next').hidden=night!==0||!solved;el('result').textContent='';draw();
+}
+function tone(frequency,time,volume,duration,type='sine'){
+ const osc=audio.createOscillator(), gain=audio.createGain();
+ osc.type=type;osc.frequency.value=frequency;osc.connect(gain);gain.connect(audio.destination);
+ gain.gain.setValueAtTime(volume,time);gain.gain.exponentialRampToValueAtTime(.001,time+duration);
+ osc.start(time);osc.stop(time+duration);voices.push(osc);
+}
+let playback=0;
+async function listen(){
+ stop();const current=++playback;log('listen');
+ const room=rooms[night], {entry,length}=config();
+ const {notes}=evaluate(night,entry,length);
+ try{
+  const Audio=window.AudioContext||window.webkitAudioContext;
+  if(Audio){audio??=new Audio();await audio.resume();}
+ }catch{audio=null;}
+ if(current!==playback)return;
+ const start=audio?audio.currentTime+.05:0;
+ for(let i=1;i<=4;i++){
+  const t=start+(i-1)*.52;
+  const noise=room.noise.includes(i);
+  if(audio){
+   if(noise){tone(740,t,.16,.36,'triangle');tone(1110,t,.08,.24);}
+   if(notes.includes(i)||(config().intro&&i===1))tone(i%2===1?392:523.25,t,noise?.025:.17,.30);
+  }
+  timers.push(setTimeout(()=>draw(i),(i-1)*520));
+ }
+ timers.push(setTimeout(()=>draw(),2080));
+}
+function change(){playback++;stop();draw();}
+for(const id of ['entry','length','intro','preset'])el(id).addEventListener('change',()=>{
+ if(night===0){solved=false;el('next').hidden=true;}
+ change();el('result').textContent='';log('adjust');
+});
+el('listen').onclick=()=>listen();
+el('submit').onclick=()=>{
+ const {entry,length,intro}=config();const outcome=evaluate(night,entry,length,intro);
+ log('submit',outcome);
+ if(night===0){
+  solved=outcome.clear.length===2;el('next').hidden=!solved;
+  el('result').textContent=solved?'两拍都听清了。莉丝接上了句尾。':'有琴声被门铃盖住了。试着移动进场的拍子，再听一次。';
+  return;
+ }
+ sales++;
+ const income=3+Number(outcome.quick)+2*Number(outcome.seated)-Number(intro);
+ el('result').textContent='第 '+sales+' 次试营业 · '+income+' 币。赶路客'+(outcome.quick?'听见了迎客短句':'没在离开前听见琴声')+'。窗边客'+(outcome.seated?'听完了完整乐句':'还没听到连续两拍')+'。'+(intro?' 已扣 1 币布置费。':'');
+ el('submit').textContent='再试一次营业';
+};
+el('next').onclick=()=>{if(!solved)return;change();night=1;el('entry').value='1';el('length').value='2';el('intro').checked=false;el('preset').value='0';scene();el('scene').focus();};
+el('reset').onclick=()=>{change();night=0;solved=false;sales=0;events=[];el('entry').value='1';el('length').value='2';el('intro').checked=false;el('preset').value='0';scene();el('scene').focus();};
+el('export').onclick=()=>{const url=URL.createObjectURL(new Blob([JSON.stringify(events,null,2)],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='sound-shop-playtest.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+scene();
+</script>
+</html>
