@@ -12,7 +12,7 @@ const memories={sugar:{n:'糖',tones:[60]},pond:{n:'水',tones:[67]},cat:{n:'猫
 const sum=o=>Object.values(o).reduce((a,b)=>a+b,0);
 const dayRoll=(day,salt)=>0.1;
 const needs=q=>q.reduce((o,v)=>(o[v.k]=(o[v.k]||0)+v.n,o),{candy:0,paper:0,moon:0,score:0});
-const tonightQueue=()=>dayQueue(),windowOption=()=>null,b=()=>'',allFound=()=>true,say=()=>{},render=()=>{};
+const tonightQueue=()=>dayQueue(),windowOption=()=>null,b=()=>'',allFound=()=>true,say=()=>{},render=()=>{},label=k=>k;let regularDemand=()=>'';
 const musicProgress=()=>s.minuet??(s.minuet={day:0});
 const turcaProgress=()=>s.turca??(s.turca={index:0});
 const collectFamily=k=>{if(s.familyCards.includes(k))return '';s.familyCards.push(k);return k;};
@@ -32,6 +32,8 @@ check('paper demand exists on even business days',dayQueue(2).some(v=>v.k==='pap
 check('moon demand exists on odd business days',dayQueue(3).some(v=>v.k==='moon'));
 check('score demand exists after music discovery',dayQueue(4)[0].k==='score');
 check('customer tender follows item price',dayQueue(2).every(v=>v.tender>=items[v.k].price*v.n));
+check('appointment HUD names paper',regularDemand(dayQueue(2)).includes('paper'));
+check('appointment HUD names moon',regularDemand(dayQueue(3)).includes('moon'));
 s.penalty=1;
 check('shortage penalty reduces regular customer count',dayQueue(2).length===2);
 s.penalty=0;s.minuet={day:1};s.turca={index:0};
