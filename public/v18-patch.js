@@ -23,6 +23,11 @@
       return { ...row,k:type,tender };
     });
   };
+  // The on-screen appointment summary must match the actual mixed-order queue.
+  regularDemand = function(queue) {
+    const n=needs(queue);
+    return Object.keys(n).filter(k=>n[k]).map(k=>label(k)+' '+s.shelf[k]+' / '+n[k]).join(' · ');
+  };
   // Extra营业仍须备齐基础预约；普通营业不强制全预约但提示缺货。
   openingRequirements = function(queue=tonightQueue(),option=windowOption()) {
     const demand=needs(dayQueue());
