@@ -12,9 +12,9 @@
   const response=await fetch(url);
   if(!response.ok)throw new Error('基础版本 HTTP '+response.status);
   let html=await response.text();
-  const signature="const store='cosmic-collector-v8-paris'";
+  const signature="store='cosmic-collector-v8-paris'";
   if(!html.includes(signature))throw new Error('基础版本存档键已变化，停止加载避免串档');
-  html=html.replace(signature,"const store='cosmic-collector-v18-play'");
+  html=html.replace(signature,"store='cosmic-collector-v18-play'");
   const base='<base href="'+url.href.replace(/[^/]*$/,'')+'">';
   html=html.replace(/<head\b[^>]*>/i,match=>match+base);
   frame.addEventListener('load',()=>{
