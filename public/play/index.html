@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>宇宙收藏家 · 正式试玩测试 V18</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#11111b;color:#eee5d6;font:15px/1.5 system-ui,sans-serif}header{min-height:50px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 16px;background:#202132;border-bottom:1px solid #57556d}a{color:#edcf91}iframe{display:block;width:100%;height:calc(100dvh - 51px);border:0}small{color:#c3c2c9}@media(max-width:600px){header{flex-wrap:wrap}iframe{height:calc(100dvh - 88px)}}</style></head>
+<body><header><div><strong>宇宙收藏家</strong> <small>· V18 正式试玩测试</small></div><nav><a href="../lab/">玩法实验室</a>　<a href="../workbench.html">开发工作台</a>　<small id="status" role="status">载入中</small></nav></header>
+<iframe id="game" title="宇宙收藏家游戏" allow="autoplay"></iframe>
+<script>
+(async()=>{
+ const status=document.querySelector('#status');
+ const frame=document.querySelector('#game');
+ try{
+  const url=new URL('../releases/v17/Cosmic_Collector_V17_PC_Offline.html',location.href);
+  const response=await fetch(url);
+  if(!response.ok)throw new Error('基础版本 HTTP '+response.status);
+  let html=await response.text();
+  const signature="store='cosmic-collector-v8-paris'";
+  if(!html.includes(signature))throw new Error('基础版本存档键已变化，停止加载避免串档');
+  html=html.replace(signature,"store='cosmic-collector-v18-play'");
+  const base='<base href="'+url.href.replace(/[^/]*$/,'')+'">';
+  html=html.replace(/<head\b[^>]*>/i,match=>match+base);
+  frame.addEventListener('load',()=>{
+   try{
+    const script=frame.contentDocument.createElement('script');
+    script.src=new URL('../v18-patch.js',location.href).href;
+    script.onload=()=>{
+     frame.contentWindow.__cosmicV18Patched=true;
+     status.textContent='V18 规则已加载 · 存档独立于 V17';
+    };
+    script.onerror=()=>{status.textContent='V18 补丁失败，请勿当作 V18 正式测试';};
+    frame.contentDocument.body.append(script);
+   }catch(error){status.textContent='补丁载入异常：'+error.message;}
+  },{once:true});
+  frame.srcdoc=html;
+ }catch(error){status.textContent='V18 未能启动：'+error.message;}
+})();
+</script></body></html>
