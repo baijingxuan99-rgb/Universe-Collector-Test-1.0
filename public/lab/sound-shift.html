@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>宇宙收藏家 · 音景与客情实验</title>
+<style>
+:root{color-scheme:dark;font:16px/1.55 system-ui,"Microsoft YaHei",sans-serif;background:#191923;color:#efeee8}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 60% 5%,#3b3448,#191923 60%)}
+main{max-width:1040px;padding:30px 24px 72px;margin:auto}h1{font-size:clamp(27px,4vw,41px);margin:5px 0 8px}h2{font-size:20px;margin:0 0 10px}h3{font-size:16px;margin:10px 0}.ey{letter-spacing:.14em;color:#d7c08e;font-size:12px}p{margin:8px 0;color:#d5d0d3}a{color:#f2d291}.row{display:flex;flex-wrap:wrap;gap:10px;margin:15px 0}.card{padding:21px;border:1px solid #575167;border-radius:15px;background:#282632;margin:14px 0}.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}button{padding:10px 15px;border:1px solid #bba786;border-radius:9px;background:#333143;color:#f2e9df;cursor:pointer;font:inherit}button:hover{border-color:#f9cf8a}button:disabled{opacity:.4;cursor:not-allowed}button[aria-pressed=true],button.primary{background:#e0bf82;color:#302634}.muted{opacity:.77}.meter{display:flex;gap:8px;margin:12px 0}.beat{padding:20px 0;flex:1;text-align:center;border-radius:10px;background:#4e4556;border:1px solid #786c82}.beat.blank{border-style:dashed;background:#262331}.result{border-left:3px solid #e4c48b;padding:12px 18px;background:#38323c}.pill{display:inline-block;border:1px solid #84768a;border-radius:999px;padding:2px 9px;margin:4px 6px 4px 0}.good{color:#bfe3c4}.bad{color:#f6b8a8}input[type=range]{width:100%;accent-color:#e0bf82}.stat{font-weight:700;color:#f4db9f}.small{font-size:13px}section[hidden]{display:none}.compare{width:100%;border-collapse:collapse}.compare th,.compare td{border-bottom:1px solid #635b67;text-align:left;padding:10px 6px}@media(max-width:700px){.cols{grid-template-columns:1fr}main{padding:15px}}
+</style></head>
+<body><main>
+<a href="./">← 返回玩法实验室</a>
+<div class="ey">UNIVERSE COLLECTOR · DAY → NIGHT EXPERIMENT</div>
+<h1>把街角的声音带回小店</h1>
+<p>独立机制实验：白天只有 <strong>1 次观察机会</strong>。你得到的客情线索，会影响夜晚用怎样的节奏迎客，以及哪些商品值得多备。</p>
+<div class="card">
+ <h2>01 · 白天调查</h2>
+ <p>今天的顾客来自同一条街。两种调查只能选一个；每种信息不完整，都要为夜晚留下判断空间。</p>
+ <div id="visit" class="row">
+  <button data-visit="door">观察门铃与急促的脚步</button>
+  <button data-visit="window">观察窗台与驻足的客人</button>
+ </div>
+ <div id="clue" role="status" class="result" hidden></div>
+ <p class="small muted">本实验的到店比例在各场景固定，不使用暗中掷骰；方便比较策略的真实取舍。</p>
+</div>
+<section id="plan" hidden>
+ <div class="cols">
+ <div class="card">
+  <h2>02 · 重组声音</h2>
+  <p>你记录了四个音。门铃会在第二拍响起。选择把音乐压缩成短句，或在门铃处留出空拍。</p>
+  <div id="beats" class="meter"></div>
+  <div class="row" id="arrangement">
+   <button data-arr="quick">短句招呼 · 清晰响亮</button>
+   <button data-arr="rest">留白轻奏 · 避开门铃</button>
+  </div>
+  <button id="listen">▶ 试听声音排列</button>
+  <p class="small">短句会让赶时间的顾客更愿意进店；留白会让想慢慢挑选的顾客愿意驻足。没有永远最优的音景。</p>
+ </div>
+ <div class="card">
+  <h2>03 · 限定货架</h2>
+  <p>今晚只有 <strong>6 格货位</strong>，商品有明确进价。留在仓库的货无法临时卖给顾客。</p>
+  <label>星星糖 <span id="candyQty" class="stat">3</span> 份，进价 2 / 售价 3</label>
+  <input id="candy" type="range" min="0" max="6" step="1" value="3">
+  <label>纸星星 <span id="paperQty" class="stat">3</span> 份，进价 2 / 售价 4</label>
+  <input id="paper" type="range" min="0" max="6" step="1" value="3">
+  <p id="budget" role="status"></p>
+  <button class="primary" id="open" disabled>开门 · 看看客人听到了什么</button>
+ </div></div>
+</section>
+<section id="outcome" class="card" hidden>
+ <h2>04 · 夜晚的结果</h2>
+ <div id="nightResult"></div>
+ <div class="row"><button id="replay">换一组客情再试</button><button id="compare">对比所有策略</button></div>
+ <div id="comparison" hidden></div>
+</section>
+</main>
+<script>
+(()=>{
+ const get=id=>document.getElementById(id), base={candy:3,paper:3};
+ let seed=0,scene=null,visit=null,arr=null;
+ const cases=[
+  {name:'书商来街口',rush:4,stay:1,step:'晚报与包裹送到街口，脚步比平日更急。'},
+  {name:'画师的小展览',rush:2,stay:3,step:'画师正布置一幅新画，有人停在窗下聊了许久。'},
+  {name:'雨后的普通夜晚',rush:3,stay:2,step:'路边铺着潮湿的石板，有人赶路，也有人看看橱窗。'}
+ ];
+ // Demand bonuses explicitly defined; no hidden random events.
+ const compute=(scene,arr,c,p)=>{
+  const demandC=Math.max(0,scene.rush+(arr==='quick'?1:-1));
+  const demandP=Math.max(0,scene.stay+(arr==='rest'?1:-1));
+  const soldC=Math.min(c,demandC),soldP=Math.min(p,demandP);
+  return {demandC,demandP,soldC,soldP,unsoldC:c-soldC,unsoldP:p-soldP,
+   sales:3*soldC+4*soldP,cost:2*(c+p),
+   profit:3*soldC+4*soldP-2*(c+p)};
+ };
+ const setArr=k=>{
+  arr=k;
+  document.querySelectorAll('[data-arr]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.arr===k)));
+  const notes=k==='quick'?[60,64,67,72]:[60,null,67,72];
+  get('beats').innerHTML=notes.map((note,i)=>'<div class="beat '+(note===null?'blank':'')+'">'+(note===null?'休止':i===1?'♪ ＋ 门铃':'♪')+'</div>').join('');
+  update();
+ };
+ const play=()=>{
+  if(!arr)return;
+  const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)return;
+  const ctx=new Audio(),now=ctx.currentTime+.07,notes=arr==='quick'?[60,64,67,72]:[60,null,67,72];
+  notes.forEach((n,i)=>{
+   if(n===null)return;const t=now+i*.29,o=ctx.createOscillator(),g=ctx.createGain();
+   o.type='triangle';o.frequency.value=440*Math.pow(2,(n-69)/12);
+   g.gain.setValueAtTime(.001,t);g.gain.exponentialRampToValueAtTime(.08,t+.01);
+   g.gain.exponentialRampToValueAtTime(.001,t+.23);o.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+.24);
+  });
+  // Doorbell is an environmental sound, not one of the musical notes.
+  const t=now+.29,o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=880;
+  g.gain.setValueAtTime(.001,t);g.gain.exponentialRampToValueAtTime(.10,t+.01);
+  g.gain.exponentialRampToValueAtTime(.001,t+.19);o.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+.20);
+  setTimeout(()=>ctx.close().catch(()=>{}),2400);
+ };
+ const update=()=>{
+  const c=+get('candy').value,p=+get('paper').value,used=c+p;
+  get('candyQty').textContent=c;get('paperQty').textContent=p;
+  get('budget').innerHTML='货架 '+used+' / 6 格 · 本轮进货成本 '+(used*2)+' / 12 币'+
+    (used!==6?' <span class="bad">（请使用全部 6 格货架）</span>':'');
+  get('open').disabled=used!==6||!arr;
+ };
+ const reveal=()=>{
+  const c=+get('candy').value,p=+get('paper').value,r=compute(scene,arr,c,p);
+  get('plan').hidden=true;get('outcome').hidden=false;
+  const choice=arr==='quick'?'短句招呼':'留白轻奏';
+  get('nightResult').innerHTML=
+   '<p><span class="pill">'+scene.name+'</span><span class="pill">'+choice+'</span></p>'+
+   '<p>听到的生活声：'+scene.step+'</p>'+
+   '<p>今晚实际想买星星糖 <strong>'+r.demandC+'</strong> 份、纸星星 <strong>'+r.demandP+'</strong> 份。</p>'+
+   '<p>卖出星星糖 <strong>'+r.soldC+'</strong> 份、纸星星 <strong>'+r.soldP+'</strong> 份；未售库存 '+(r.unsoldC+r.unsoldP)+' 份。</p>'+
+   '<p>营业收入 '+r.sales+' 币，进货成本 '+r.cost+' 币，<strong class="'+(r.profit>=0?'good':'bad')+'">本晚净现金变化 '+(r.profit>=0?'+':'')+r.profit+' 币</strong>。</p>'+
+   '<p class="small">音景改变了顾客的停留倾向，而不是凭空替你生产商品。预计销量与货位同时决定实际收益。</p>';
+ };
+ const compare=()=>{
+  let rows=[];
+  for(const plan of ['quick','rest'])
+   for(let c=0;c<=6;c++){
+    const x=compute(scene,plan,c,6-c);
+    rows.push({plan,c,p:6-c,profit:x.profit,sales:x.sales});
+   }
+  rows.sort((a,b)=>b.profit-a.profit);
+  const best=rows[0], actual=compute(scene,arr,+get('candy').value,+get('paper').value);
+  get('comparison').hidden=false;
+  get('comparison').innerHTML='<h3>固定这组客情后的策略比较</h3>'+
+   '<p>当前选择的利润是 '+actual.profit+' 币。同样条件下，最高是 '+best.profit+
+   ' 币。差距 '+(best.profit-actual.profit)+' 币；没有随机惩罚。</p>'+
+   '<table class="compare"><thead><tr><th>音景</th><th>糖 / 纸</th><th>利润</th></tr></thead><tbody>'+
+   rows.slice(0,7).map(r=>'<tr><td>'+(r.plan==='quick'?'短句':'留白')+'</td><td>'+r.c+' / '+r.p+'</td><td>'+r.profit+'</td></tr>').join('')+
+   '</tbody></table><p class="small">本表只是实验数据，不代表游戏完整版的经济平衡已通过验证。</p>';
+ };
+ const restart=()=>{
+  seed++;scene=cases[(seed-1)%cases.length];arr=null;visit=null;
+  get('plan').hidden=true;get('outcome').hidden=true;get('comparison').hidden=true;get('clue').hidden=true;
+  get('visit').querySelectorAll('button').forEach(b=>b.disabled=false);
+  get('candy').value=3;get('paper').value=3;
+  get('beats').innerHTML='';
+  document.querySelectorAll('[data-arr]').forEach(x=>x.setAttribute('aria-pressed','false'));update();
+ };
+ document.querySelectorAll('[data-visit]').forEach(button=>button.addEventListener('click',()=>{
+  if(visit)return;visit=button.dataset.visit;
+  get('clue').hidden=false;
+  get('clue').innerHTML=visit==='door'?
+   '<b>观察 · 门铃</b><p>'+scene.step+'</p><p>门铃响起时脚步会加快。你知道赶时间的顾客大致有 '+scene.rush+' 位，但还不知道有多少人想停下来看画。</p>':
+   '<b>观察 · 窗台</b><p>'+scene.step+'</p><p>你记录了驻足的人大致有 '+scene.stay+' 位，但不知道有多少赶路的人只想买糖就走。</p>';
+  get('plan').hidden=false;get('visit').querySelectorAll('button').forEach(b=>b.disabled=true);
+ }));
+ document.querySelectorAll('[data-arr]').forEach(button=>button.addEventListener('click',()=>setArr(button.dataset.arr)));
+ ['candy','paper'].forEach(id=>get(id).addEventListener('input',update));
+ get('listen').addEventListener('click',play);
+ get('open').addEventListener('click',reveal);
+ get('replay').addEventListener('click',restart);
+ get('compare').addEventListener('click',compare);
+ restart();
+})();
+</script></body></html>
