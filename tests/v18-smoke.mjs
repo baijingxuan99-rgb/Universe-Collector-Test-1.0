@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 const patch=readFileSync('public/v18-patch.js','utf8');
 const mock=`
 const console={info:()=>{}};
-let s={day:2,penalty:0,unlock:['candy'],familyCards:[],tab:'dream',muted:true};
+let s={day:2,penalty:0,unlock:['candy'],familyCards:[],tab:'dream',muted:true,shelf:{candy:10,paper:5,moon:5,score:5}};
 let open=null,audio=null;
 const items={candy:{price:3},paper:{price:4},moon:{price:5},score:{price:5}};
 const memories={sugar:{n:'糖',tones:[60]},pond:{n:'水',tones:[67]},cat:{n:'猫',tones:[65]}},slotDefs=[['a','','sugar'],['b','','pond'],['c','','cat']],theme=[60,67];
