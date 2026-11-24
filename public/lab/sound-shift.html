@@ -33,7 +33,7 @@ main{max-width:1040px;padding:30px 24px 72px;margin:auto}h1{font-size:clamp(27px
    <button data-arr="rest">留白轻奏 · 避开门铃</button>
   </div>
   <button id="listen">▶ 试听声音排列</button>
-  <p class="small">短句会让赶时间的顾客更愿意进店；留白会让想慢慢挑选的顾客愿意驻足。没有永远最优的音景。</p>
+  <p class="small">短句吸引赶路客；赶路特别繁忙时，快捷招呼还可从成交的星星糖获得每份 1 币服务赏钱。留白吸引驻足客购买纸星星。没有永远最优的音景。</p>
  </div>
  <div class="card">
   <h2>03 · 限定货架</h2>
@@ -67,9 +67,12 @@ main{max-width:1040px;padding:30px 24px 72px;margin:auto}h1{font-size:clamp(27px
   const demandC=Math.max(0,scene.rush+(arr==='quick'?1:-1));
   const demandP=Math.max(0,scene.stay+(arr==='rest'?1:-1));
   const soldC=Math.min(c,demandC),soldP=Math.min(p,demandP);
+  // Only genuinely busy rush nights reward short, clear musical greetings:
+  // a 1-coin voluntary service tip per candy purchase. No tips on quiet nights.
+  const serviceTip=arr==='quick'&&scene.rush>=4?soldC:0;
   return {demandC,demandP,soldC,soldP,unsoldC:c-soldC,unsoldP:p-soldP,
-   sales:3*soldC+4*soldP,cost:2*(c+p),
-   profit:3*soldC+4*soldP-2*(c+p)};
+   sales:3*soldC+4*soldP,serviceTip,cost:2*(c+p),
+   profit:3*soldC+4*soldP+serviceTip-2*(c+p)};
  };
  const setArr=k=>{
   arr=k;
@@ -110,7 +113,7 @@ main{max-width:1040px;padding:30px 24px 72px;margin:auto}h1{font-size:clamp(27px
    '<p>听到的生活声：'+scene.step+'</p>'+
    '<p>今晚实际想买星星糖 <strong>'+r.demandC+'</strong> 份、纸星星 <strong>'+r.demandP+'</strong> 份。</p>'+
    '<p>卖出星星糖 <strong>'+r.soldC+'</strong> 份、纸星星 <strong>'+r.soldP+'</strong> 份；未售库存 '+(r.unsoldC+r.unsoldP)+' 份。</p>'+
-   '<p>营业收入 '+r.sales+' 币，进货成本 '+r.cost+' 币，<strong class="'+(r.profit>=0?'good':'bad')+'">本晚净现金变化 '+(r.profit>=0?'+':'')+r.profit+' 币</strong>。</p>'+
+   '<p>营业收入 '+r.sales+' 币，快捷招呼赏钱 '+r.serviceTip+' 币，进货成本 '+r.cost+' 币，<strong class="'+(r.profit>=0?'good':'bad')+'">本晚净现金变化 '+(r.profit>=0?'+':'')+r.profit+' 币</strong>。</p>'+
    '<p class="small">音景改变了顾客的停留倾向，而不是凭空替你生产商品。预计销量与货位同时决定实际收益。</p>';
  };
  const compare=()=>{
