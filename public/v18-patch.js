@@ -130,6 +130,7 @@
     return old.perform(a,k);
   };
   backfill();
-  if(s.tab==='archive')render();
+  // Refresh the initial V17-rendered screen after loading the corrected rules.
+  render();
   console.info('Universe Collector V18 overlay enabled', {shopQueue:true,storyCards:true,sourceMusic:true});
 })();
